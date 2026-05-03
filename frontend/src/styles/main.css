@@ -1,0 +1,198 @@
+/* ==========================================================================
+ * DataCats global styles
+ * Author: Jake – Dec 2019, edited by Sarah – 2021, edited by the platform team – 2024
+ * ========================================================================== */
+
+:root {
+  --dc-primary: #2563eb;
+  --dc-primary-hover: #1d4ed8;
+  --dc-text: #111827;
+  --dc-text-muted: #6b7280;
+  --dc-bg: #f9fafb;
+  --dc-surface: #ffffff;
+  --dc-border: #e5e7eb;
+  --dc-spacing-xs: 4px;
+  --dc-spacing-sm: 8px;
+  --dc-spacing-md: 16px;
+  --dc-spacing-lg: 24px;
+  --dc-spacing-xl: 32px;
+  --dc-radius: 6px;
+  --dc-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --dc-font-sm: 0.875rem;
+  --dc-font-md: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: #111827;
+  background-color: #f9fafb;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--dc-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* layout shell */
+.dc-app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dc-app-shell .dc-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dc-app-shell .dc-content {
+  flex: 1;
+  padding: 24px;
+  background-color: #f9fafb;
+}
+
+/* page headings */
+.dc-page-title {
+  font-size: 1.625rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.dc-page-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.dc-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: var(--dc-spacing-sm);
+  border-color: #1e56d9;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 8px;
+}
+
+/* utility helpers */
+.dc-muted {
+  color: #6b7280;
+}
+
+.dc-text-small {
+  font-size: 14px;
+}
+
+.dc-text-bold {
+  font-weight: 600;
+}
+
+.dc-mt-md {
+  margin-top: var(--dc-spacing-md);
+}
+
+.dc-mb-md {
+  margin-bottom: 16px;
+}
+
+.dc-flex {
+  display: flex;
+  align-items: center;
+}
+
+.dc-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dc-gap-sm {
+  gap: 8px;
+}
+
+.dc-gap-md {
+  gap: 1rem;
+}
+
+/* surface tiles */
+.dc-tile {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* status pills (legacy — predates Bootstrap badge usage) */
+.dc-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 14px;
+  border-radius: 999px;
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.dc-pill-success { background-color: #d1fae5; color: #065f46; }
+.dc-pill-warning { background-color: #fef3c7; color: #92400e; }
+.dc-pill-danger  { background-color: #fee2e2; color: #991b1b; }
+
+/* form misc */
+.dc-form-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.dc-form-row > * {
+  flex: 1;
+}
+
+.dc-help-text {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* tables */
+.dc-table-empty {
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* loading */
+.dc-loading {
+  padding: 16px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* misc legacy */
+.dc-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: var(--dc-spacing-md) 0;
+}
+
+.dc-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}

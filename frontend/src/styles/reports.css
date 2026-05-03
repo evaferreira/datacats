@@ -1,0 +1,84 @@
+/* reports.css — Reports page */
+
+.dc-reports {
+  padding: 1rem;
+}
+
+.dc-reports h1 {
+  font-size: 1.625rem;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.dc-reports .dc-reports-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.dc-report-section {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dc-report-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.dc-report-section .dc-report-meta {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.dc-report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dc-report-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.dc-report-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dc-report-cohort-cell {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+}
+
+.dc-report-cohort-cell .pct {
+  color: #6b7280;
+  font-size: 13px;
+  margin-left: 4px;
+}
+
+.dc-report-export-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dc-report-export-row .dc-export-hint {
+  font-size: 13px;
+  color: #6b7280;
+  align-self: center;
+}
