@@ -48,6 +48,8 @@ And finally, incremental milestones — what are the smallest deployable steps? 
 
 Let's build a refactor plan together, using AI to help us through each of these six pieces.
 
+Notice we're not starting from zero. The AI inherits context from the AGENTS file we created earlier — so when we ask for a refactor plan, it already knows what this app is and where the design system sits.
+
 \[Demo (\~1 minute) — building a refactor plan with AI. Not scripted.\]
 
 \[back to slides\]
