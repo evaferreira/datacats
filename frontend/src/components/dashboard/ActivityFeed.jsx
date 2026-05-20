@@ -1,6 +1,7 @@
 import React from 'react'
 import { fetchWithAuth } from '../../utils/api'
 import { formatRelativeTime } from '../../utils/dates'
+import Badge from '../ui/Badge'
 
 class ActivityFeed extends React.Component {
   constructor(props) {
@@ -28,12 +29,12 @@ class ActivityFeed extends React.Component {
       .catch(() => this.setState({ loading: false }))
   }
 
-  toneClass(severity) {
+  tone(severity) {
     switch (severity) {
-      case 'success': return 'badge badge-pill badge-success'
-      case 'warning': return 'badge badge-pill badge-warning'
-      case 'danger':  return 'badge badge-pill badge-danger'
-      default:        return 'badge badge-pill badge-secondary'
+      case 'success': return 'success'
+      case 'warning': return 'warning'
+      case 'danger':  return 'danger'
+      default:        return 'neutral'
     }
   }
 
@@ -52,8 +53,8 @@ class ActivityFeed extends React.Component {
             items.map(item => (
               <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
                 <span>
-                  <span className={this.toneClass(item.severity)} style={{ marginRight: 8 }}>
-                    {item.type}
+                  <span style={{ marginRight: 8 }}>
+                    <Badge tone={this.tone(item.severity)}>{item.type}</Badge>
                   </span>
                   {item.message}
                 </span>

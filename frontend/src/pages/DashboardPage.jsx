@@ -6,6 +6,7 @@ import RevenueChart from '../components/dashboard/RevenueChart'
 import ActivityFeed from '../components/dashboard/ActivityFeed'
 import LineChart from '../components/charts/LineChart'
 import BarChart from '../components/charts/BarChart'
+import Badge from '../components/ui/Badge'
 
 import { fetchWithAuth } from '../utils/api'
 import { calculateRetentionScore, calculateMRR } from '../utils/metrics'
@@ -50,12 +51,12 @@ export default function DashboardPage() {
     return (current - previous) / previous
   }
 
-  function getStatusColor(status) {
+  function getStatusTone(status) {
     switch (status) {
       case 'active':  return 'success'
       case 'at-risk': return 'warning'
       case 'churned': return 'danger'
-      default:        return 'secondary'
+      default:        return 'neutral'
     }
   }
 
@@ -420,8 +421,8 @@ export default function DashboardPage() {
                       <small style={{ color: '#6b7280' }}>{u.email}</small>
                     </span>
                     <span>
-                      <span className={'badge badge-' + getStatusColor(u.status)} style={{ marginRight: 8 }}>
-                        {u.status}
+                      <span style={{ marginRight: 8 }}>
+                        <Badge tone={getStatusTone(u.status)}>{u.status}</Badge>
                       </span>
                       <small style={{ color: '#6b7280' }}>{formatDate(u.createdAt)}</small>
                     </span>
