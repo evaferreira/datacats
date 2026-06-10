@@ -28,13 +28,17 @@ the only audit-doc clip in M2.
 
 ## Candidate demos (pick one)
 
-### Option A — Plan, extract one hook, capture the convention (recommended)
-Three beats:
-1. Ask AI to enumerate `DashboardPage`'s responsibilities (data fetching, derived metrics, date filters, layout, dead code). AI proposes a decomposition plan.
-2. Execute one piece on camera: extract the metrics-fetching into a `useDashboardMetrics` hook in a new `src/hooks/` directory. `DashboardPage` shrinks visibly.
-3. **Capture the convention.** Ask AI to update `CLAUDE.md` / `AGENTS.md` with the new rules we just established: hooks live in `src/hooks/`, page components stay thin, data-fetching belongs in hooks. Show the diff — it should be small (a few lines).
+### Option A+ — Clean, extract, capture ✅ **CONFIRMED PATH**
+Three beats — a mix of original Option A (extract + capture) with a slice of Option D (dead-code cleanup) as the opener. The cleanup acts as *prep*: once the noise is gone, `DashboardPage`'s real responsibilities become visible, so the hook extraction feels like the obvious next move.
 
-**Shines because:** mirrors M1c4 exactly (audit → plan → execute smallest piece) and adds a callback to M1c2's "capture context for future AI sessions" beat. The "file got smaller" moment is satisfying on screen; the AGENTS.md update is the *durable* artifact that survives this codebase outliving any one session. Leaves the rest of the plan as a documented backlog — viewers see the *path*, not the *destination*.
+1. **Clean (~1 min).** Remove dead code the audit flagged: `processData2`, `tempFix`, the commented-out dark-mode block, the commented-out `legacyExportBlock`. `DashboardPage` drops from 454 → ~400 lines.
+2. **Extract (~2 min).** AI lists `DashboardPage`'s remaining responsibilities (data fetching, derived metrics, filters, layout), proposes a decomposition plan, then executes the first extraction: pull metrics-fetching into a `useDashboardMetrics` hook in a new `src/hooks/` directory. File drops to ~350 lines.
+3. **Capture (~30s).** Update `CLAUDE.md` / `AGENTS.md` with the new convention: hooks live in `src/hooks/`, pages stay thin, data-fetching belongs in hooks.
+
+**Why this mix wins:** the cleanup beat is a low-friction warmup that produces a visual win and threads back to Clip 1's audit (the bonus "dead code" section finally gets cashed in). The extract beat is the architectural move. The capture beat is the durable artifact that outlives the session. Together they teach *cleanup → extract → document* as a repeatable pattern, not a one-time stunt.
+
+### Option A — Plan, extract one hook, capture the convention (original)
+Same three beats as A+ but without the dead-code cleanup opener. Documented here as the original recommendation in case the cleanup beat ever needs to be cut for time.
 
 ### Option B — Extract everything at once
 Ask AI to do the full decomposition in one shot: hooks (`useDashboardMetrics`, `useActivityFeed`, `usePlanRevenue`), components (`DashboardFilters`, `RecentSignupsList`), de-duplicated utility imports. Show the before/after diff and the new directory tree.
@@ -56,21 +60,26 @@ Decompose `DashboardPage` into smaller *components* rather than hooks: pull out 
 
 **Shines because:** more accessible to viewers who don't yet think in custom hooks. Teaches "separation of concerns" without the hooks learning curve. Risk: doesn't tee up the "custom hooks" mental model the outline implies.
 
-## My take
-**Option A** is the best fit for the outline and the longest clip in the module (7 min — there's room for the plan beat). If you want the clip to feel more dramatic, **Option B**, but you lose the planning thesis the course has been building. **Option C** and **D** are better as *minor* beats inside A, not as the whole clip.
+## Decision (locked)
+**Option A+** is the confirmed demo path. The cleanup beat is small enough to fit the clip's 7-minute budget and pedagogically strong enough to justify the addition — it threads back to Clip 1's audit AND teaches the "clean before you restructure" principle that slide 3 names explicitly.
 
-## Suggested opening prompts
+## Closing thesis (locked)
+> *"You're not just rewriting code — you're writing instructions for the next contributor."*
 
-**For Option A, beat 1 (plan):**
-> "Analyze `src/pages/DashboardPage.jsx`. List every distinct responsibility this component has. Then propose a decomposition plan: what should be extracted into custom hooks, what should become smaller components, and what can move to existing utilities. Don't change anything yet — just give me the plan."
+This lands on slide 7 (post-demo). The "convention isn't real until it's captured" lesson sits on slide 6.
 
-**For Option A, beat 2 (execute):**
-> "Let's execute the first item from the plan: extract the metrics-fetching logic into a `useDashboardMetrics` custom hook in `src/hooks/`. Keep `DashboardPage`'s rendering logic intact. Update imports."
+## Suggested prompts (Option A+)
 
-**For Option A, beat 3 (capture):**
-> "We just established a new convention — custom hooks live in `src/hooks/`, and page components should be thin renderers with data-fetching pulled into hooks. Update `CLAUDE.md` (or `AGENTS.md`, whichever exists) to record this so future AI sessions follow the same pattern. Keep the addition short — just the rule and a one-line reason."
+**Beat 1 (clean):**
+> "The audit we did in Clip 1 flagged dead code in `DashboardPage.jsx` — `processData2`, `tempFix`, the commented-out dark-mode block, the commented-out `legacyExportBlock`, and the misleading comment on `handleStuff`. Remove all of them. Don't touch any working code yet — just clear the noise."
 
-Voiceover thread for beat 3: *"This is the thing we miss most often. We refactor, we ship, and then six months later a new contributor — or a fresh AI session — reinvents the old pattern because nobody wrote down the new one. The convention isn't real until it's captured."*
+**Beat 2 (extract):**
+> "Now that the file is cleaner, list the remaining responsibilities `DashboardPage` has — data fetching, derived metrics, filter state, layout. Then propose a decomposition: what should become a custom hook, what could move to existing utilities. After that, execute the first item: extract the metrics-fetching into a `useDashboardMetrics` custom hook in a new `src/hooks/` directory."
+
+**Beat 3 (capture):**
+> "We just established a new convention — custom hooks live in `src/hooks/`, and page components stay thin with data-fetching pulled into hooks. Update `CLAUDE.md` (or `AGENTS.md`, whichever exists) to record this so future AI sessions follow the same pattern. Keep the addition short — the rule and a one-line reason."
+
+Voiceover thread for beat 3: *"This is the thing teams miss most often. We refactor, we ship, we move on — and then six months later someone reinvents the old pattern because nobody wrote down the new one. The convention isn't real until it's captured."*
 
 ## Key files to reference
 - [src/pages/DashboardPage.jsx](frontend/src/pages/DashboardPage.jsx) — 454 lines, the monolith
@@ -78,11 +87,16 @@ Voiceover thread for beat 3: *"This is the thing we miss most often. We refactor
 - `src/hooks/` — does not exist yet, will be created
 - `CLAUDE.md` / `AGENTS.md` — the agent-instruction file from M1c2, gets a small append in beat 3
 
-## Expected outcome shape (Option A)
-- `src/hooks/useDashboardMetrics.js` — new
-- `src/pages/DashboardPage.jsx` — reduced (roughly ~350 lines after one extraction)
+## Expected outcome shape (Option A+)
+- `src/pages/DashboardPage.jsx` — reduced from 454 → ~400 lines (cleanup) → ~350 lines (extraction)
+- `src/hooks/useDashboardMetrics.js` — new file in a new directory
 - `CLAUDE.md` / `AGENTS.md` — small append capturing the hooks convention
-- The rest of the plan documented for future passes
+- The rest of the decomposition plan documented in the conversation for future passes
+
+## Slides
+See [m2-c3-slides.md](m2-c3-slides.md) for the 6-slide outline that wraps this demo.
 
 ## Watch for
-- If `CLAUDE.md` / `AGENTS.md` doesn't exist in the recording branch (e.g., the M1 demo wasn't committed), the beat still works — frame it as *"let's add this to our agent-instruction file"* and create it inline. Don't break the flow chasing M1 state.
+- If `CLAUDE.md` / `AGENTS.md` doesn't exist in the recording branch (e.g., the M1 demo wasn't committed), beat 3 still works — frame it as *"let's add this to our agent-instruction file"* and create it inline. Don't break the flow chasing M1 state.
+- During beat 1, the AI may want to also remove `QuickStats` (the unused import in `App.js:14`). That's fine if it stays quick — but if it spirals into a discussion, defer and stay scoped to `DashboardPage.jsx`.
+- During beat 2, AI may propose extracting multiple hooks at once (`useDashboardMetrics`, `useActivityFeed`, `usePlanRevenue`). Pre-decide on camera: we extract ONE, document the rest in the conversation, and move on. The "small steps" thesis depends on this.
