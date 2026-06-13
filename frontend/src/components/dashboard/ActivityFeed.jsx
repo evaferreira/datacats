@@ -64,5 +64,3 @@ function ActivityFeed() {
 }
 
 export default ActivityFeed
-</content>
-</invoke>

@@ -42,4 +42,3 @@ function RevenueChart({ dateRange }) {
 }
 
 export default RevenueChart
-</content>
