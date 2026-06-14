@@ -54,21 +54,21 @@ Findings within each section are ordered highest-impact first. Every finding cit
 - **Duplicated formatters** across [frontend formatters.js](frontend/src/utils/formatters.js) and [backend formatters.js](backend/utils/formatters.js).
 
 ### Inconsistent imports of the same utility
-- Components pull `fetchWithAuth` from all three modules: [DashboardPage.jsx](frontend/src/pages/DashboardPage.jsx)←`api`, [TeamSettings.jsx](frontend/src/components/settings/TeamSettings.jsx)←`apiHelpers`, [MetricsCard.jsx](frontend/src/components/dashboard/MetricsCard.jsx)←`api` — so different screens authenticate against different token keys.
+- Components pull `fetchWithAuth` from all three modules: [useDashboardData.js](frontend/src/hooks/useDashboardData.js)←`api` (extracted from DashboardPage), [TeamSettings.jsx](frontend/src/components/settings/TeamSettings.jsx)←`apiHelpers`, [MetricsCard.jsx](frontend/src/components/dashboard/MetricsCard.jsx)←`api` — so different screens authenticate against different token keys.
 
 ### Inline duplicate logic
-- `formatCurrency` reimplemented inline at [DashboardPage.jsx:40](frontend/src/pages/DashboardPage.jsx#L40), [MetricsCard.jsx:34](frontend/src/components/dashboard/MetricsCard.jsx#L34), [ReportTable.jsx:55](frontend/src/components/reports/ReportTable.jsx#L55), [ReportsPage.jsx:55](frontend/src/pages/ReportsPage.jsx#L55) — despite [formatters.js:4](frontend/src/utils/formatters.js#L4).
-- Status→tone mapping in 3 places: [DashboardPage.jsx:54](frontend/src/pages/DashboardPage.jsx#L54), [formatters.js:32](frontend/src/utils/formatters.js#L32), [ActivityFeed.jsx:32](frontend/src/components/dashboard/ActivityFeed.jsx#L32).
+- `formatCurrency` reimplemented inline at [DashboardPage.jsx:42](frontend/src/pages/DashboardPage.jsx#L42), [MetricsCard.jsx:34](frontend/src/components/dashboard/MetricsCard.jsx#L34), [ReportTable.jsx:55](frontend/src/components/reports/ReportTable.jsx#L55), [ReportsPage.jsx:55](frontend/src/pages/ReportsPage.jsx#L55) — despite [formatters.js:4](frontend/src/utils/formatters.js#L4).
+- Status→tone mapping in 3 places: [DashboardPage.jsx:51](frontend/src/pages/DashboardPage.jsx#L51), [formatters.js:32](frontend/src/utils/formatters.js#L32), [ActivityFeed.jsx:32](frontend/src/components/dashboard/ActivityFeed.jsx#L32).
 - `sortAndPaginate` duplicated verbatim across [UserTable.jsx:37](frontend/src/components/users/UserTable.jsx#L37) and [ReportTable.jsx:37](frontend/src/components/reports/ReportTable.jsx#L37).
 - `.catch(() => {})` silent fetch-error pattern repeated 10+ times across dashboard components and ApiKeyManager.
 
 ### Oversized files (verified line counts)
-- [DashboardPage.jsx](frontend/src/pages/DashboardPage.jsx) (454) — container + 4 inline formatters + dead handlers + commented blocks + heavy JSX; split into section components.
+- [DashboardPage.jsx](frontend/src/pages/DashboardPage.jsx) (303, was 454) — fetching + metric derivation extracted to [useDashboardData.js](frontend/src/hooks/useDashboardData.js) (116); dead handlers + commented blocks already removed; 3 inline formatters remain. **Remaining:** split the heavy JSX into section components.
 - [TeamSettings.jsx](frontend/src/components/settings/TeamSettings.jsx) (229), [ApiKeyManager.jsx](frontend/src/components/settings/ApiKeyManager.jsx) (154).
 - [backend/routes/metrics.js](backend/routes/metrics.js) (135) — service layer + mock data + routes in one file.
 
 ### Mixed responsibilities
-- `DashboardPage.jsx` mixes state, inline utils, data derivation, and rendering.
+- `DashboardPage.jsx` — data fetching + derivation now extracted to the `useDashboardData` hook; the page still mixes filter state, inline utils, and rendering.
 - Backend `routes/*.js` blend service logic, in-memory mock data, and route handlers; [backend/routes/settings.js](backend/routes/settings.js) mixes callback / promise / async-await styles in a single file.
 
 ---
@@ -83,7 +83,7 @@ Findings within each section are ordered highest-impact first. Every finding cit
 - [App.js:14](frontend/src/App.js#L14) — `QuickStats` imported but never rendered (comment admits it's only for IDE autocomplete).
 
 ### Defined-but-never-called / no-op functions
-- [DashboardPage.jsx:131](frontend/src/pages/DashboardPage.jsx#L131) `handleLegacyExport` (only in commented JSX); :114 `processData2` (called but no-op); :126 `tempFix` (IE11 relic).
+- ✅ ~~[DashboardPage.jsx] `handleLegacyExport`, `processData2`, `tempFix`~~ — **removed**; no longer present in the file.
 - [ReportsPage.jsx:24](frontend/src/pages/ReportsPage.jsx#L24) `handleApply` — `console.log` only.
 - [backend/middleware/auth.js:28](backend/middleware/auth.js#L28) `optionalAuth` — never imported.
 
@@ -94,10 +94,10 @@ Findings within each section are ordered highest-impact first. Every finding cit
 - [backend/routes/legacyExport.js](backend/routes/legacyExport.js) `/csv`, `/pdf`, `/bulk`; [routes/settings.js:93](backend/routes/settings.js#L93) `/migrate`; [routes/reports.js:66](backend/routes/reports.js#L66) `/export` & :71 `/schedule`.
 
 ### Stale commented-out blocks
-- [DashboardPage.jsx:154](frontend/src/pages/DashboardPage.jsx#L154) dark-mode block & :178 legacy header/export; [App.js:36](frontend/src/App.js#L36) three commented routes; [utils/metrics.js:20](frontend/src/utils/metrics.js#L20) `calculateMRROld`; [utils/formatters.js:24](frontend/src/utils/formatters.js#L24) `formatCurrencyOld`; [backend/server.js:26](backend/server.js#L26) featureFlags middleware.
+- ~~DashboardPage dark-mode block & legacy header/export~~ — **removed**; [App.js:36](frontend/src/App.js#L36) three commented routes; [utils/metrics.js:20](frontend/src/utils/metrics.js#L20) `calculateMRROld`; [utils/formatters.js:24](frontend/src/utils/formatters.js#L24) `formatCurrencyOld`; [backend/server.js:26](backend/server.js#L26) featureFlags middleware.
 
 ### Unused vars / state & stubs
-- [DashboardPage.jsx:26](frontend/src/pages/DashboardPage.jsx#L26) `pollTick` (remount hack); `data2` aliases in UserTable/ReportTable.
+- [DashboardPage.jsx:14](frontend/src/pages/DashboardPage.jsx#L14) `pollTick` (remount hack — still present; used as the ActivityFeed force-refresh key); `data2` aliases in UserTable/ReportTable.
 - [components/ui/Input.jsx](frontend/src/components/ui/Input.jsx) — pass-through stub ("don't use until v9"); [components/ui/Button.jsx](frontend/src/components/ui/Button.jsx) — only primary/secondary variants implemented.
 
 ---
