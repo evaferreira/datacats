@@ -10,9 +10,9 @@ function calculateGrowth(current, previous) {
 
 // useDashboardData — owns all data fetching for the Overview route and derives the
 // numbers/arrays the page renders. Takes filter state from the page so it stays a
-// pure function of its inputs. (The page's "Force refresh" re-renders the page, which
-// re-runs this hook and its no-dep poll effect.)
-export default function useDashboardData(filters) {
+// pure function of its inputs. `refreshKey` is bumped by the page's "Force refresh"
+// button to deliberately re-run every fetch.
+export default function useDashboardData(filters, refreshKey) {
   const [overviewData, setOverviewData] = useState(null)
   const [revenueSeries, setRevenueSeries] = useState([])
   const [planRevenue, setPlanRevenue] = useState([])
@@ -39,10 +39,9 @@ export default function useDashboardData(filters) {
         setError(err && err.message)
         setLoading(false)
       })
-  }, [])
+  }, [refreshKey])
 
-  // 2) Filters-dependent fetch — but `filters` is rebuilt every render, so this
-  //    actually fires on every render. Don't ask.
+  // 2) Filters-dependent fetch — re-runs when the (memoized) filters change or on refresh.
   useEffect(() => {
     fetchWithAuth('/api/v1/metrics/mrr')
       .then(data => {
@@ -50,14 +49,14 @@ export default function useDashboardData(filters) {
         setRevenueSeries(series)
       })
       .catch(() => {})
-  }, [filters])
+  }, [filters, refreshKey])
 
-  // 3) Poll-tick effect — note the missing dependency array, so this runs on every render.
+  // 3) Revenue-by-plan fetch — on mount and on explicit refresh.
   useEffect(() => {
     fetchWithAuth('/api/v1/reports/revenue-by-plan')
       .then(data => setPlanRevenue(data || []))
       .catch(() => {})
-  })
+  }, [refreshKey])
 
   // ---- derive display values ----
 

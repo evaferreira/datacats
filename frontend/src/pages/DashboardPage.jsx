@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import MetricsCard from '../components/dashboard/MetricsCard'
 import MetricsSummary from '../components/dashboard/MetricsSummary'
@@ -18,8 +18,12 @@ export default function DashboardPage() {
   const [endDate, setEndDate] = useState('2025-04-30')
   const [planType, setPlanType] = useState('all')
 
-  // !! filters object is rebuilt every render — useEffect([filters]) re-runs every render.
-  const filters = { startDate: startDate, endDate: endDate, planType: planType }
+  // Memoized so the reference is stable across renders — only changes when a filter
+  // value actually changes, which keeps the data hook's effects from looping.
+  const filters = useMemo(
+    () => ({ startDate, endDate, planType }),
+    [startDate, endDate, planType]
+  )
 
   // data fetching + derived metrics live in the hook
   const {
@@ -35,7 +39,7 @@ export default function DashboardPage() {
     churnedUsers,
     avgSessionDays,
     metrics,
-  } = useDashboardData(filters)
+  } = useDashboardData(filters, pollTick)
 
   // ---- inline duplicate utilities (also defined in utils/) ----
 
