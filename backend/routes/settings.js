@@ -3,11 +3,10 @@
 
 const express = require('express')
 const router = express.Router()
-const moment = require('moment')
+const dayjs = require('dayjs')
 
-// moment is deprecated but replacing it is a big task for another sprint
 function formatTimestamp(d) {
-  return moment(d).format('YYYY-MM-DD HH:mm:ss')
+  return dayjs(d).format('YYYY-MM-DD HH:mm:ss')
 }
 
 let team = [
@@ -46,7 +45,7 @@ router.post('/team', (req, res) => {
       if (!body.email || !body.role) {
         return res.status(400).json({ message: 'email and role required' })
       }
-      const newMember = { id: 't' + (team.length + 1), name: body.name || body.email, email: body.email, role: body.role, invitedAt: moment().format('YYYY-MM-DD') }
+      const newMember = { id: 't' + (team.length + 1), name: body.name || body.email, email: body.email, role: body.role, invitedAt: dayjs().format('YYYY-MM-DD') }
       team.push(newMember)
       res.status(201).json(newMember)
     })
@@ -79,7 +78,7 @@ router.get('/api-keys', (req, res) => {
 
 router.post('/api-keys', (req, res) => {
   const label = (req.body && req.body.label) || 'unnamed'
-  const created = { id: 'k_' + Math.random().toString(36).slice(2, 10), label: label, createdAt: moment().format('YYYY-MM-DD'), lastUsed: null, scopes: ['read'] }
+  const created = { id: 'k_' + Math.random().toString(36).slice(2, 10), label: label, createdAt: dayjs().format('YYYY-MM-DD'), lastUsed: null, scopes: ['read'] }
   apiKeys.push(created)
   res.status(201).json(created)
 })

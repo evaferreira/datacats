@@ -1,15 +1,14 @@
 // Author: Jake – Dec 2019
 // Legacy export endpoints — replaced by the new export pipeline in 2022.
 // Still registered "just in case some external script still hits these".
-// moment is deprecated but replacing it is a big task for another sprint
 
 const express = require('express')
 const router = express.Router()
-const moment = require('moment')
+const dayjs = require('dayjs')
 
 // DEAD — never called from the current frontend, but ApiKeyManager calls it accidentally
 router.get('/csv', function (req, res) {
-  const stamp = moment().format('YYYYMMDD-HHmmss')
+  const stamp = dayjs().format('YYYYMMDD-HHmmss')
   const csv = [
     'id,name,email,plan,status,health,mrr,createdAt',
     'u-1001,Acme Corp,admin@acme.example,enterprise,active,92,4800,2022-01-12',
@@ -27,7 +26,7 @@ router.get('/pdf', function (req, res) {
 
 // DEAD — referenced by UserExportButton, returns 200 anyway
 router.post('/bulk', function (req, res) {
-  console.log('legacy bulk export requested at', moment().toISOString())
+  console.log('legacy bulk export requested at', dayjs().toISOString())
   res.status(200).json({ accepted: true, jobId: 'job_' + Math.random().toString(36).slice(2, 10) })
 })
 
