@@ -15,12 +15,13 @@ internal branch numbering). The companion branch name is shown next to each.
 | 05 | M2 C4 | [05-m2-c4-performance.md](05-m2-c4-performance.md) | `demo/m2-c4-performance` |
 | 06 | M2 C5 | [06-m2-c5-modernize-dependencies.md](06-m2-c5-modernize-dependencies.md) | `demo/m2-c5-modernize-dependencies` |
 | 07 | M3 C1 | [07-m3-c1-dead-endpoints.md](07-m3-c1-dead-endpoints.md) | `demo/m3-c1-dead-endpoints` |
-| 08 | M3 C4 | [08-m3-c4-design-consistency.md](08-m3-c4-design-consistency.md) | `demo/m3-c4-design-consistency` |
-| 09 | M3 C5 | [09-m3-c5-bootstrap-migration-at-scale.md](09-m3-c5-bootstrap-migration-at-scale.md) | `demo/m3-c5-bootstrap-migration-at-scale` |
-| 10 | M4 C1 | [10-m4-c1-regression-risks.md](10-m4-c1-regression-risks.md) | `demo/m4-c1-regression-risks` |
-| 11 | M4 C2 | [11-m4-c2-git-discipline.md](11-m4-c2-git-discipline.md) | `demo/m4-c2-git-discipline` |
-| 12 | M4 C3 | [12-m4-c3-cicd-quality-gates.md](12-m4-c3-cicd-quality-gates.md) | `demo/m4-c3-cicd-quality-gates` |
-| 13 | M5 C3 | [13-m5-c3-sustaining.md](13-m5-c3-sustaining.md) | `demo/m5-c3-sustaining` |
+| 08 | M3 C3 | [08-m3-c3-cross-cutting-plan.md](08-m3-c3-cross-cutting-plan.md) | continues `demo/m3-c1-dead-endpoints` |
+| 09 | M3 C4 | [09-m3-c4-design-consistency.md](09-m3-c4-design-consistency.md) | `demo/m3-c4-design-consistency` |
+| 10 | M3 C5 | [10-m3-c5-bootstrap-migration-at-scale.md](10-m3-c5-bootstrap-migration-at-scale.md) | `demo/m3-c5-bootstrap-migration-at-scale` |
+| 11 | M4 C1 | [11-m4-c1-regression-risks.md](11-m4-c1-regression-risks.md) | `demo/m4-c1-regression-risks` |
+| 12 | M4 C2 | [12-m4-c2-git-discipline.md](12-m4-c2-git-discipline.md) | `demo/m4-c2-git-discipline` |
+| 13 | M4 C3 | [13-m4-c3-cicd-quality-gates.md](13-m4-c3-cicd-quality-gates.md) | `demo/m4-c3-cicd-quality-gates` |
+| 14 | M5 C3 | [14-m5-c3-sustaining.md](14-m5-c3-sustaining.md) | `demo/m5-c3-sustaining` |
 
 ## Note on improvements
 
