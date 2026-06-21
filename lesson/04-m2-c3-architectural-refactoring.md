@@ -94,7 +94,7 @@ Voiceover thread for beat 3: *"This is the thing teams miss most often. We refac
 - The rest of the decomposition plan documented in the conversation for future passes
 
 ## Slides
-See [m2-c3-slides.md](m2-c3-slides.md) for the 6-slide outline that wraps this demo.
+See [m2-c3-slides.md](module2/m2-c3-slides.md) for the 6-slide outline that wraps this demo.
 
 ## Watch for
 - If `CLAUDE.md` / `AGENTS.md` doesn't exist in the recording branch (e.g., the M1 demo wasn't committed), beat 3 still works — frame it as *"let's add this to our agent-instruction file"* and create it inline. Don't break the flow chasing M1 state.
