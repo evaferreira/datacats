@@ -17,7 +17,7 @@ internal branch numbering). The companion branch name is shown next to each.
 | 07 | M3 C1 | [07-m3-c1-dead-endpoints.md](07-m3-c1-dead-endpoints.md) | `demo/m3-c1-dead-endpoints` |
 | 08 | M3 C3 | [08-m3-c3-cross-cutting-plan.md](08-m3-c3-cross-cutting-plan.md) | continues `demo/m3-c1-dead-endpoints` |
 | 09 | M3 C4 | [09-m3-c4-design-consistency.md](09-m3-c4-design-consistency.md) | `demo/m3-c4-design-consistency` |
-| 10 | M3 C5 | [10-m3-c5-bootstrap-migration-at-scale.md](10-m3-c5-bootstrap-migration-at-scale.md) | `demo/m3-c5-bootstrap-migration-at-scale` |
+| 10 | M3 C5 | [10-m3-c5-example-driven-migration.md](10-m3-c5-example-driven-migration.md) | `demo/m3-c5-example-driven-migration` |
 | 11 | M4 C1 | [11-m4-c1-regression-risks.md](11-m4-c1-regression-risks.md) | `demo/m4-c1-regression-risks` |
 | 12 | M4 C2 | [12-m4-c2-git-discipline.md](12-m4-c2-git-discipline.md) | `demo/m4-c2-git-discipline` |
 | 13 | M4 C3 | [13-m4-c3-cicd-quality-gates.md](13-m4-c3-cicd-quality-gates.md) | `demo/m4-c3-cicd-quality-gates` |

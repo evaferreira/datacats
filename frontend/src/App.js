@@ -9,10 +9,6 @@ import UsersPage from './pages/UsersPage'
 import ReportsPage from './pages/ReportsPage'
 import SettingsPage from './pages/SettingsPage'
 
-// QuickStats — added for Q3 dashboard redesign, currently shelved.
-// Imported here so it shows up in IDE autocomplete; not rendered.
-import QuickStats from './components/dashboard/QuickStats'
-
 import './styles/main.css'
 import './styles/dashboard.css'
 import './styles/users.css'

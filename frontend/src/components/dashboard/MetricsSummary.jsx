@@ -3,31 +3,6 @@ import React from 'react'
 // Near-duplicate of MetricsCard. Renders an aggregate summary tile.
 // "we'll consolidate these later" — Sarah, 2021
 class MetricsSummary extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      total: 0,
-      avg: 0,
-    }
-  }
-
-  componentDidMount() {
-    this.recalc(this.props)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (JSON.stringify(prevProps.values) !== JSON.stringify(this.props.values)) {
-      this.recalc(this.props)
-    }
-  }
-
-  recalc(props) {
-    const values = props.values || []
-    const total = values.reduce((a, b) => a + (Number(b) || 0), 0)
-    const avg = values.length ? total / values.length : 0
-    this.setState({ total, avg })
-  }
-
   formatValue(v) {
     if (this.props.format === 'currency') return '$' + Number(v || 0).toLocaleString()
     if (this.props.format === 'percent') return (Number(v || 0) * 100).toFixed(1) + '%'
@@ -35,8 +10,10 @@ class MetricsSummary extends React.Component {
   }
 
   render() {
-    const { title, footnote } = this.props
-    const { total, avg } = this.state
+    const { title, footnote, values } = this.props
+    const vals = values || []
+    const total = vals.reduce((a, b) => a + (Number(b) || 0), 0)
+    const avg = vals.length ? total / vals.length : 0
 
     return (
       <div className="card">
