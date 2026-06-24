@@ -9,9 +9,11 @@ const PALETTE = {
 }
 
 export default function Badge({ tone, children }) {
-  const colors = PALETTE[tone] || PALETTE.neutral
+  const resolvedTone = PALETTE[tone] ? tone : 'neutral'
+  const colors = PALETTE[resolvedTone]
   return (
     <span
+      data-tone={resolvedTone}
       style={{
         display: 'inline-block',
         padding: '2px 8px',

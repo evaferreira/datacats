@@ -1,4 +1,5 @@
 import React from 'react'
+import Badge from '../ui/Badge'
 
 function planLabel(plan) {
   if (plan === 'starter') return 'Starter'
@@ -7,11 +8,11 @@ function planLabel(plan) {
   return plan
 }
 
-function statusBadgeClass(status) {
-  if (status === 'active') return 'badge badge-success'
-  if (status === 'at-risk') return 'badge badge-warning'
-  if (status === 'churned') return 'badge badge-danger'
-  return 'badge badge-secondary'
+function statusBadgeTone(status) {
+  if (status === 'active') return 'success'
+  if (status === 'at-risk') return 'warning'
+  if (status === 'churned') return 'danger'
+  return 'neutral'
 }
 
 function formatCurrency(amount) {
@@ -39,7 +40,7 @@ function UserRow(props) {
       </td>
       <td>{planLabel(u.plan)}</td>
       <td>
-        <span className={statusBadgeClass(u.status)}>{u.status}</span>
+        <Badge tone={statusBadgeTone(u.status)}>{u.status}</Badge>
       </td>
       <td>
         <span className="dc-user-health-bar">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReportFilters from '../components/reports/ReportFilters'
 import ChurnCohortChart from '../components/reports/ChurnCohortChart'
+import Badge from '../components/ui/Badge'
 import { fetchWithAuth } from '../utils/apiHelpers'
 
 export default function ReportsPage() {
@@ -54,11 +55,11 @@ export default function ReportsPage() {
                 <td>${(r.revenue || 0).toLocaleString()}</td>
                 <td>
                   {r.revenue > 50000 ? (
-                    <span className="badge badge-success">strong</span>
+                    <Badge tone="success">strong</Badge>
                   ) : r.revenue > 20000 ? (
-                    <span className="badge badge-warning">growing</span>
+                    <Badge tone="warning">growing</Badge>
                   ) : (
-                    <span className="badge badge-secondary">small</span>
+                    <Badge tone="neutral">small</Badge>
                   )}
                 </td>
               </tr>
@@ -86,11 +87,11 @@ export default function ReportsPage() {
                 <td>{(f.adoption * 100).toFixed(0)}%</td>
                 <td>
                   {f.adoption > 0.5 ? (
-                    <span className="badge badge-success">healthy</span>
+                    <Badge tone="success">healthy</Badge>
                   ) : f.adoption > 0.2 ? (
-                    <span className="badge badge-warning">building</span>
+                    <Badge tone="warning">building</Badge>
                   ) : (
-                    <span className="badge badge-danger">low</span>
+                    <Badge tone="danger">low</Badge>
                   )}
                 </td>
               </tr>

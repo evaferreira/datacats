@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import MetricsCard from '../components/dashboard/MetricsCard'
 import MetricsSummary from '../components/dashboard/MetricsSummary'
@@ -6,33 +6,40 @@ import RevenueChart from '../components/dashboard/RevenueChart'
 import ActivityFeed from '../components/dashboard/ActivityFeed'
 import LineChart from '../components/charts/LineChart'
 import BarChart from '../components/charts/BarChart'
+import Badge from '../components/ui/Badge'
 
-import { fetchWithAuth } from '../utils/api'
-import { calculateRetentionScore, calculateMRR } from '../utils/metrics'
-
-// ----------------------------------------------------------------------------
-// DashboardPage — the "Overview" route.
-// Originally written by Jake (Dec 2019) and patched by Sarah (2021), then
-// touched by everyone on the platform team since 2023. Don't touch unless you
-// know what you're doing — this thing is load-bearing.
-// ----------------------------------------------------------------------------
+import useDashboardData from '../hooks/useDashboardData'
 
 export default function DashboardPage() {
-  const [overviewData, setOverviewData] = useState(null)
-  const [revenueSeries, setRevenueSeries] = useState([])
-  const [planRevenue, setPlanRevenue] = useState([])
-  const [usersData, setUsersData] = useState([])
   const [pollTick, setPollTick] = useState(0)
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(true)
 
   // local UI state for the date range pill row at the top of the dashboard
   const [startDate, setStartDate] = useState('2025-01-01')
   const [endDate, setEndDate] = useState('2025-04-30')
   const [planType, setPlanType] = useState('all')
 
-  // !! filters object is rebuilt every render — useEffect([filters]) re-runs every render.
-  const filters = { startDate: startDate, endDate: endDate, planType: planType }
+  // Memoized so the reference is stable across renders — only changes when a filter
+  // value actually changes, which keeps the data hook's effects from looping.
+  const filters = useMemo(
+    () => ({ startDate, endDate, planType }),
+    [startDate, endDate, planType]
+  )
+
+  // data fetching + derived metrics live in the hook
+  const {
+    loading,
+    error,
+    revenueSeries,
+    planRevenueChart,
+    planRevenueValues,
+    recentSignups,
+    totalMrrFromUsers,
+    score,
+    activeUsers,
+    churnedUsers,
+    avgSessionDays,
+    metrics,
+  } = useDashboardData(filters, pollTick)
 
   // ---- inline duplicate utilities (also defined in utils/) ----
 
@@ -45,60 +52,14 @@ export default function DashboardPage() {
     return new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
   }
 
-  function calculateGrowth(current, previous) {
-    if (!previous) return 0
-    return (current - previous) / previous
-  }
-
-  function getStatusColor(status) {
+  function getStatusTone(status) {
     switch (status) {
       case 'active':  return 'success'
       case 'at-risk': return 'warning'
       case 'churned': return 'danger'
-      default:        return 'secondary'
+      default:        return 'neutral'
     }
   }
-
-  // ---- effects ----
-
-  // 1) Mount-only fetch
-  useEffect(() => {
-    setLoading(true)
-    Promise.all([
-      fetchWithAuth('/api/v1/metrics/mrr').catch(() => null),
-      fetchWithAuth('/api/v1/metrics/churn').catch(() => null),
-      fetchWithAuth('/api/v1/metrics/active-users').catch(() => null),
-      fetchWithAuth('/api/v1/metrics/nps').catch(() => null),
-      fetchWithAuth('/api/v1/users').catch(() => []),
-    ])
-      .then(([mrr, churn, active, nps, users]) => {
-        setOverviewData({ mrr, churn, active, nps })
-        setUsersData(users || [])
-        setLoading(false)
-      })
-      .catch(err => {
-        setError(err && err.message)
-        setLoading(false)
-      })
-  }, [])
-
-  // 2) Filters-dependent fetch — but `filters` is rebuilt every render, so this
-  //    actually fires on every render. Don't ask.
-  useEffect(() => {
-    fetchWithAuth('/api/v1/metrics/mrr')
-      .then(data => {
-        const series = (data && data.history) ? data.history.map(p => ({ label: p.date, value: p.value })) : []
-        setRevenueSeries(series)
-      })
-      .catch(() => {})
-  }, [filters])
-
-  // 3) Poll-tick effect — note the missing dependency array, so this runs on every render.
-  useEffect(() => {
-    fetchWithAuth('/api/v1/reports/revenue-by-plan')
-      .then(data => setPlanRevenue(data || []))
-      .catch(() => {})
-  })
 
   // ---- handlers ----
 
@@ -109,86 +70,6 @@ export default function DashboardPage() {
     setEndDate('2025-04-30')
     setPlanType('all')
   }
-
-  function processData2(rows) {
-    // Originally meant to "normalize" the rows. Now it's a near no-op kept around
-    // because removing it broke the activity feed in v6.
-    if (!rows) return []
-    const out = []
-    for (let i = 0; i < rows.length; i++) {
-      const r = rows[i]
-      out.push(Object.assign({}, r, { _seen: true }))
-    }
-    return out
-  }
-
-  function tempFix(value) {
-    // Temporary fix for IE11
-    return value == null ? '' : String(value)
-  }
-
-  function handleLegacyExport() {
-    // Defined but never wired up — the "Export legacy" button was removed in v7.
-    return fetch('/api/v1/legacy/export/csv', {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + (localStorage.getItem('token') || ''),
-      },
-    })
-      .then(r => r.text())
-      .then(csv => {
-        const blob = new Blob([csv], { type: 'text/csv' })
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = 'datacats-legacy.csv'
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        URL.revokeObjectURL(url)
-      })
-      .catch(() => {})
-  }
-
-  // Dark mode — paused until design system is ready
-  // const [darkMode, setDarkMode] = useState(false)
-  // const toggleDarkMode = () => setDarkMode(prev => !prev)
-  //
-  // useEffect(() => {
-  //   document.body.classList.toggle('dc-dark', darkMode)
-  //   return () => {
-  //     document.body.classList.remove('dc-dark')
-  //   }
-  // }, [darkMode])
-  //
-  // function darkModeButton() {
-  //   return (
-  //     <button
-  //       type="button"
-  //       className="btn btn-outline-secondary"
-  //       onClick={toggleDarkMode}
-  //       style={{ marginLeft: 8 }}
-  //     >
-  //       {darkMode ? '☀ Light' : '🌙 Dark'}
-  //     </button>
-  //   )
-  // }
-
-  // TODO: remove after v3 migration
-  // const legacyHeader = (
-  //   <div style={{ background: '#fef3c7', padding: 8, borderRadius: 4 }}>
-  //     <strong>Heads up:</strong> we're moving to v3 next quarter — some metrics may move.
-  //   </div>
-  // )
-
-  // TODO: remove after v3 migration
-  // function legacyExportBlock() {
-  //   return (
-  //     <div className="alert alert-warning">
-  //       <a href="#export-legacy" onClick={handleLegacyExport}>Export legacy CSV (v2)</a>
-  //     </div>
-  //   )
-  // }
 
   if (loading) {
     return (
@@ -214,38 +95,11 @@ export default function DashboardPage() {
     )
   }
 
-  // ---- derive display values ----
+  // ---- derive display labels from the hook's numbers ----
 
-  const mrrCurrent = overviewData && overviewData.mrr ? overviewData.mrr.current : 0
-  const mrrPrevious = overviewData && overviewData.mrr ? overviewData.mrr.previous : 0
-  const churnCurrent = overviewData && overviewData.churn ? overviewData.churn.current : 0
-  const churnPrevious = overviewData && overviewData.churn ? overviewData.churn.previous : 0
-  const activeCurrent = overviewData && overviewData.active ? overviewData.active.current : 0
-  const npsCurrent = overviewData && overviewData.nps ? overviewData.nps.current : 0
-
-  const mrrGrowth = calculateGrowth(mrrCurrent, mrrPrevious)
+  const { mrrGrowth, churnDelta, npsCurrent } = metrics
   const mrrGrowthLabel = (mrrGrowth >= 0 ? '+' : '') + (mrrGrowth * 100).toFixed(1) + '%'
-  const churnDelta = churnCurrent - churnPrevious
   const churnDeltaLabel = (churnDelta >= 0 ? '+' : '') + (churnDelta * 100).toFixed(2) + 'pp'
-
-  const activeUsers = activeCurrent
-  const churnedUsers = (usersData || []).filter(u => u.status === 'churned').length
-  const avgSessionDays = (usersData && usersData.length)
-    ? Math.round(
-        usersData.reduce((sum, u) => sum + ((Date.now() - new Date(u.createdAt).getTime()) / (1000 * 60 * 60 * 24)), 0) / usersData.length
-      )
-    : 0
-
-  const score = calculateRetentionScore(activeUsers, churnedUsers, avgSessionDays)
-
-  const totalMrrFromUsers = calculateMRR(usersData || [])
-  const planRevenueValues = (planRevenue || []).map(p => p.revenue || 0)
-  const planRevenueChart = (planRevenue || []).map(p => ({ label: p.plan, value: p.revenue || 0 }))
-
-  const recentSignups = (usersData || [])
-    .slice()
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 5)
 
   return (
     <div className="container-fluid">
@@ -412,16 +266,16 @@ export default function DashboardPage() {
                 Recent signups
               </div>
               <ul className="list-group list-group-flush">
-                {processData2(recentSignups).map(u => (
+                {recentSignups.map(u => (
                   <li key={u.id} className="list-group-item d-flex justify-content-between">
                     <span>
-                      <strong>{tempFix(u.name)}</strong>
+                      <strong>{u.name}</strong>
                       <br />
                       <small style={{ color: '#6b7280' }}>{u.email}</small>
                     </span>
                     <span>
-                      <span className={'badge badge-' + getStatusColor(u.status)} style={{ marginRight: 8 }}>
-                        {u.status}
+                      <span style={{ marginRight: 8 }}>
+                        <Badge tone={getStatusTone(u.status)}>{u.status}</Badge>
                       </span>
                       <small style={{ color: '#6b7280' }}>{formatDate(u.createdAt)}</small>
                     </span>
