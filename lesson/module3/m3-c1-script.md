@@ -1,6 +1,6 @@
 # Clip 1: Why Large-Scale Refactoring Is Different — Script Draft
 
-**Total clip duration:** ~4:10 min — **Demo portion:** ~2:00 (narrated live, not scripted here) — **Spoken slide budget:** ~2:08 min (~299 words at Eva's 140 wpm pace) — **Voice:** Eva — collaborative, warm, direct, conversational — **Threaded thesis:** *at scale, the hard part stops being the code and becomes the coordination — and we can't coordinate what we can't see* — **Outline coverage status:** module map (slide 1) + all slide bullets covered; the outline's "merge conflicts" and "daily-commits vs untouched" distinctions land in slide 4's narration; demo intentionally unscripted.
+**Total clip duration:** ~3:50 min (recorded) — **Demo portion:** ~1:45 (recorded; voiceover transcribed below — 249 words ≈ 1:43 at ~145 wpm) — **Spoken slide budget:** ~2:08 min (299 words at Eva's 140 wpm pace) — **Voice:** Eva — collaborative, warm, direct, conversational — **Threaded thesis:** *at scale, the hard part stops being the code and becomes the coordination — and we can't coordinate what we can't see* — **Outline coverage status:** module map (slide 1) + all slide bullets covered; the outline's "merge conflicts" and "daily-commits vs untouched" distinctions land in slide 4's narration; demo recorded and transcribed below.
 
 ---
 
@@ -26,21 +26,15 @@ So where does AI help us first? It can read the whole system at once — and bui
 
 [demo time]
 
-<!-- Demo not scripted — narrated live over the screen recording. Outcome: cross-reference backend ↔ frontend, classify, update ENDPOINT_REGISTRY.md. Full brief: lesson/07-m3-c1-dead-endpoints.md.
+Here's the thing: we currently have a monorepo application, a NodeJS backend and a frontend built with React. Our backend exposes a number of endpoints, and the frontend calls them — they live in the routes directory of the backend. Something that we have noticed recently is that some of those files mention that a certain endpoint is... DEAD. But before removing anything, I want to make sure those are really not being used in the frontend in any way.
 
-     Beats:
-       1. (~30s) Ask AI to list every backend route (server.js + route files) AND search the frontend src/ for all
-          API calls — account for all three fetch clients (api.js, apiHelpers.js, apiClient.js).
-       2. (~45s) Cross-reference → the clean four with no frontend caller: GET /reports/export, POST /reports/schedule,
-          GET /legacy/export/pdf, POST /settings/migrate.
-       3. (~30s) Push on legacyExport.js — the payoff: 2 of its 3 routes are STILL called
-          (ApiKeyManager.jsx:57 → /legacy/export/csv; UserExportButton.jsx:16 → /legacy/export/bulk). Not cleanly
-          dead — these are "zombies" (hardcoded CSV / fabricated jobId). This is the hidden-dependency beat — name it.
-       4. (~15s) Update ENDPOINT_REGISTRY.md, splitting truly-uncalled from called-but-obsolete.
+So let's open a new session and let's ask our AI agent to help us list all the available routes in the backend, then we will ask it to search the frontend for everywhere they're called and finally, to cross-reference that information so we can confirm which endpoints are truly deprecated. We simply don't want to blindly trust a code comment that could be very stale.
 
-     Voiceover hook (the thread): "'Dead' is a claim you verify by reading both sides of the call — not a grep result."
-     Watch: identify + classify only — don't fix or remove anything this clip.
--->
+Alright, it has finished. As expected, it begins with a breakdown of all our backend routes, and notes that out of those, 19 are called from the frontend. And there are almost 10 that are truly unused and can be removed.
+
+It makes a very important note at the end where it mentions that in fact, that file that mentioned 3 dead endpoints... was wrong. Out of those 3, there are two that are still being referenced in the frontend code.
+
+This is exactly the kind of cross-cutting research AI is great at — reading a large codebase across frontend and backend at once.
 
 [back to slides]
 
@@ -50,9 +44,9 @@ And that's the technique. We didn't trust that an endpoint was dead just because
 
 ## Notes for Eva
 
-- **Word count (spoken, slides only):** 299 words — roughly 2:08 of slide time at your 140 wpm pace. Paired with a ~2:00 demo, the clip lands around 4:10 — right on target. Taking the safest cut below brings slides to ~2:00 (~4:00 total).
+- **Word count:** slides 299 words ≈ 2:08 (140 wpm); demo voiceover 249 words ≈ 1:43 (145 wpm). Total ≈ 3:50 — confirm against the actual recorded demo length (the video may run a bit longer than the voiceover with on-screen AI-processing time).
 - **Safest cut if running long:** on slide 4, drop the closing "actively-changing codebase… untouched for years" sentence (~20 words / ~9s). The four-row contrast above it still carries the "scale is different" point.
 - **Thread to lean into:** "coordination" — name it on slide 1 ("becomes the coordination"), hit it hard on slide 3 ("changing fifty is coordination"), and land it in the close ("the change is the easy part — knowing what it touches is the work"). The recurring image is that we can't see the whole system at once, which the demo's zombies prove.
 - **Clip independence:** slide 1 lists the module's topics as areas of work, not "the next clips," and the close says "we map the dependencies, then coordinate" rather than naming a planning clip — keep it that way so this stands alone for anyone landing here cold.
-- **Demo note:** the `[demo time]` comment holds the four beats, the zombie payoff, and the voiceover hook — narrate those live; they're not in the spoken slide copy. The zombies are the on-camera proof of the "hidden dependencies / can't see it all at once" thread.
+- **Demo note:** the demo is now recorded — the voiceover is transcribed inline under `[demo time]` (no longer a beats comment). The zombie reveal (2 of the 3 "dead" legacy routes are actually called) is the on-camera proof of the "can't see it all at once" thread.
 - **Swappable reference:** none — no names or external specifics in this clip.
