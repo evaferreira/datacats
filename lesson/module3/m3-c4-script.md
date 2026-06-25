@@ -30,18 +30,23 @@ Let's run a design audit!
 
 [demo time]
 
-<!-- Demo not scripted — narrated live over the screen recording. Outcome: a design audit + a proposed CSS custom-property token system (audit & propose, NOT a full migration). Full brief: lesson/09-m3-c4-design-consistency.md.
+<!-- Demo not scripted — narrated live over the screen recording. Outcome: a design audit that surfaces an existing-but-unadopted token system, plus a consolidation proposal (audit & propose, NOT a full migration). Full brief: lesson/09-m3-c4-design-consistency.md.
+
+     KEY: main.css :root ALREADY defines the tokens (--dc-primary, --dc-spacing-*, --dc-font-sm). The debt is
+     non-adoption — so the story is "adopt what we already have," not "invent a system." (It's --dc-*, not --dp-*.)
 
      Beats:
        1. (~1 min) COLORS. Find every unique color hex across the CSS (main / dashboard / users / reports / settings.css)
-          and inline styles. Group the near-duplicates — "these 6 blues are all meant to be brand primary."
-       2. (~1 min) FONTS + SPACING. All font-size values (6+ distinct sizes for "small text"); all spacing values —
-          three approaches: raw px, rem, and var(--dp-spacing-*). Inline offenders: MetricsCard.jsx, Sidebar.jsx,
-          TopBar.jsx, UserRow.jsx.
-       3. (~45s) PROPOSE. AI proposes a CSS custom-property token system: a spacing scale, a type scale, a color palette.
-       4. (~15s) ONE-FILE PROOF. Migrate a single hardcoded value to a token in one file — the pattern, not the sweep.
+          and inline styles. Group the near-duplicates — 7 blues, almost all meant to be --dc-primary, which already exists.
+       2. (~1 min) FONTS + SPACING. Font sizes: 10+ distinct, with near-misses like 0.925rem / 0.975rem around
+          --dc-font-sm (0.875rem). Spacing in three forms: raw px, rem, and var(--dc-spacing-*) — used in ONLY
+          settings.css. Inline offenders: MetricsCard.jsx, Sidebar.jsx, TopBar.jsx, UserRow.jsx.
+       3. (~45s) CONSOLIDATE. AI surfaces that main.css already has the tokens and they're barely used — propose
+          consolidating onto them and filling the gaps, not inventing a new system.
+       4. (~15s) ONE-FILE PROOF. Swap one hardcoded value for the existing token in a single file — e.g. #2563eb →
+          var(--dc-primary), or 16px → var(--dc-spacing-md). The pattern, not the sweep.
 
-     Voiceover thread: "We're standardizing what's already there, not redesigning."
+     Voiceover thread: "We're standardizing onto the tokens we already have, not redesigning."
      Watch: audit & propose only — no full migration this clip.
 -->
 

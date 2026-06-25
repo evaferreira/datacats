@@ -44,7 +44,7 @@ planning work (retire vs. migrate, and coordinate the caller changes *before* th
 ## Suggested opening AI prompt
 "I want to identify dead API endpoints in this codebase. Can you:
 1. List all routes registered in the backend (server.js + all route files)
-2. Search the frontend src/ for all API calls and extract the endpoint URLs
+2. Search the frontend directory for all API calls and extract the endpoint URLs
 3. Cross-reference them and tell me which backend endpoints are never called from the frontend"
 
 (Then push further: "For anything that looks dead, double-check whether a component still
