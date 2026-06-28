@@ -88,7 +88,7 @@ export default function DashboardPage() {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-12">
-            <p style={{ color: '#b91c1c' }}>{error}</p>
+            <p style={{ color: 'var(--dc-danger)' }}>{error}</p>
           </div>
         </div>
       </div>
@@ -113,9 +113,9 @@ export default function DashboardPage() {
       </div>
 
       {/* date / plan controls — Bootstrap form-row */}
-      <div className="row" style={{ marginBottom: 16 }}>
+      <div className="row" style={{ marginBottom: 'var(--dc-spacing-md)' }}>
         <div className="col-md-3">
-          <label htmlFor="dc-start" style={{ fontSize: 14, color: '#6b7280' }}>Start</label>
+          <label htmlFor="dc-start" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Start</label>
           <input
             id="dc-start"
             type="date"
@@ -125,7 +125,7 @@ export default function DashboardPage() {
           />
         </div>
         <div className="col-md-3">
-          <label htmlFor="dc-end" style={{ fontSize: 14, color: '#6b7280' }}>End</label>
+          <label htmlFor="dc-end" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>End</label>
           <input
             id="dc-end"
             type="date"
@@ -135,7 +135,7 @@ export default function DashboardPage() {
           />
         </div>
         <div className="col-md-3">
-          <label htmlFor="dc-plan" style={{ fontSize: 14, color: '#6b7280' }}>Plan</label>
+          <label htmlFor="dc-plan" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Plan</label>
           <select
             id="dc-plan"
             className="form-control"
@@ -172,7 +172,7 @@ export default function DashboardPage() {
       </div>
 
       {/* row 2: 2 summary tiles */}
-      <div className="row" style={{ marginTop: 16 }}>
+      <div className="row" style={{ marginTop: 'var(--dc-spacing-md)' }}>
         <div className="col-md-6">
           <MetricsSummary
             title="Revenue across plans"
@@ -191,18 +191,18 @@ export default function DashboardPage() {
       </div>
 
       {/* row 3: revenue chart */}
-      <div className="row" style={{ marginTop: 16 }}>
+      <div className="row" style={{ marginTop: 'var(--dc-spacing-md)' }}>
         <div className="col-md-12">
           <RevenueChart dateRange={(startDate || '') + '|' + (endDate || '')} />
         </div>
       </div>
 
       {/* row 4: line + bar charts side by side */}
-      <div className="row" style={{ marginTop: 16 }}>
+      <div className="row" style={{ marginTop: 'var(--dc-spacing-md)' }}>
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <div className="card-title" style={{ fontSize: 15, fontWeight: 600 }}>
+              <div className="card-title" style={{ fontSize: 'var(--dc-font-sm)', fontWeight: 600 }}>
                 MRR trend
               </div>
               <LineChart data={revenueSeries} dataKey="value" xKey="label" height={220} />
@@ -212,7 +212,7 @@ export default function DashboardPage() {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <div className="card-title" style={{ fontSize: 15, fontWeight: 600 }}>
+              <div className="card-title" style={{ fontSize: 'var(--dc-font-sm)', fontWeight: 600 }}>
                 Revenue by plan
               </div>
               <BarChart data={planRevenueChart} dataKey="value" xKey="label" height={220} />
@@ -222,7 +222,7 @@ export default function DashboardPage() {
       </div>
 
       {/* row 5: 2 more aggregate cards */}
-      <div className="row" style={{ marginTop: 16 }}>
+      <div className="row" style={{ marginTop: 'var(--dc-spacing-md)' }}>
         <div className="col-md-3">
           <MetricsCard title="MRR change" metric="mrr" format="currency" filters={filters} />
         </div>
@@ -232,21 +232,21 @@ export default function DashboardPage() {
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <div className="card-title" style={{ fontSize: 15, fontWeight: 600 }}>
+              <div className="card-title" style={{ fontSize: 'var(--dc-font-sm)', fontWeight: 600 }}>
                 Quick stats
               </div>
               <div className="row">
                 <div className="col-md-4">
-                  <div className="card-text" style={{ fontSize: 14, color: '#6b7280' }}>MRR growth</div>
-                  <div className="card-text" style={{ fontSize: '1.375rem', fontWeight: 700 }}>{mrrGrowthLabel}</div>
+                  <div className="card-text" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>MRR growth</div>
+                  <div className="card-text" style={{ fontSize: 'var(--dc-font-2xl)', fontWeight: 700 }}>{mrrGrowthLabel}</div>
                 </div>
                 <div className="col-md-4">
-                  <div className="card-text" style={{ fontSize: 14, color: '#6b7280' }}>Churn delta</div>
-                  <div className="card-text" style={{ fontSize: '1.375rem', fontWeight: 700 }}>{churnDeltaLabel}</div>
+                  <div className="card-text" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Churn delta</div>
+                  <div className="card-text" style={{ fontSize: 'var(--dc-font-2xl)', fontWeight: 700 }}>{churnDeltaLabel}</div>
                 </div>
                 <div className="col-md-4">
-                  <div className="card-text" style={{ fontSize: 14, color: '#6b7280' }}>NPS</div>
-                  <div className="card-text" style={{ fontSize: '1.375rem', fontWeight: 700 }}>{npsCurrent}</div>
+                  <div className="card-text" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>NPS</div>
+                  <div className="card-text" style={{ fontSize: 'var(--dc-font-2xl)', fontWeight: 700 }}>{npsCurrent}</div>
                 </div>
               </div>
             </div>
@@ -255,14 +255,14 @@ export default function DashboardPage() {
       </div>
 
       {/* row 6: activity feed + recent signups */}
-      <div className="row" style={{ marginTop: 16 }}>
+      <div className="row" style={{ marginTop: 'var(--dc-spacing-md)' }}>
         <div className="col-md-6">
           <ActivityFeed key={'feed-' + pollTick} />
         </div>
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <div className="card-title" style={{ fontSize: 15, fontWeight: 600 }}>
+              <div className="card-title" style={{ fontSize: 'var(--dc-font-sm)', fontWeight: 600 }}>
                 Recent signups
               </div>
               <ul className="list-group list-group-flush">
@@ -271,13 +271,13 @@ export default function DashboardPage() {
                     <span>
                       <strong>{u.name}</strong>
                       <br />
-                      <small style={{ color: '#6b7280' }}>{u.email}</small>
+                      <small style={{ color: 'var(--dc-text-muted)' }}>{u.email}</small>
                     </span>
                     <span>
-                      <span style={{ marginRight: 8 }}>
+                      <span style={{ marginRight: 'var(--dc-spacing-sm)' }}>
                         <Badge tone={getStatusTone(u.status)}>{u.status}</Badge>
                       </span>
-                      <small style={{ color: '#6b7280' }}>{formatDate(u.createdAt)}</small>
+                      <small style={{ color: 'var(--dc-text-muted)' }}>{formatDate(u.createdAt)}</small>
                     </span>
                   </li>
                 ))}
@@ -287,15 +287,15 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="row" style={{ marginTop: 24 }}>
+      <div className="row" style={{ marginTop: 'var(--dc-spacing-lg)' }}>
         <div className="col-md-12">
-          <small style={{ color: '#6b7280' }}>
+          <small style={{ color: 'var(--dc-text-muted)' }}>
             Health score (mock formula): {score}. Refresh tick #{pollTick}.
           </small>
         </div>
       </div>
 
-      <div className="row" style={{ marginTop: 8 }}>
+      <div className="row" style={{ marginTop: 'var(--dc-spacing-sm)' }}>
         <div className="col-md-12">
           <button type="button" className="btn btn-link" onClick={() => setPollTick(t => t + 1)}>
             Force refresh

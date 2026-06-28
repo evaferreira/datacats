@@ -22,9 +22,9 @@ export default function TopBar() {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark"
-      style={{ background: '#245fe6', padding: '0.5rem 1rem' }}
+      style={{ background: 'var(--dc-primary)', padding: 'var(--dc-spacing-sm) var(--dc-spacing-md)' }}
     >
-      <a className="navbar-brand" href="/" style={{ color: '#ffffff', fontWeight: 600 }}>
+      <a className="navbar-brand" href="/" style={{ color: 'var(--dc-text-inverse)', fontWeight: 600 }}>
         DataCats
       </a>
       <button className="navbar-toggler" type="button" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@ export default function TopBar() {
               aria-haspopup="true"
               aria-expanded={open}
               onClick={(e) => { e.preventDefault(); setOpen(o => !o) }}
-              style={{ color: '#e5e7eb' }}
+              style={{ color: 'var(--dc-border)' }}
             >
               Account
             </a>

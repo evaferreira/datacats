@@ -5,56 +5,56 @@
 }
 
 .dc-settings h1 {
-  font-size: 1.625rem;
-  color: #2563eb;
+  font-size: var(--dc-font-3xl);
+  color: var(--dc-primary);
   margin-bottom: var(--dc-spacing-sm);
 }
 
 .dc-settings .dc-settings-subtitle {
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
   margin-bottom: var(--dc-spacing-md);
 }
 
 .dc-settings-tabs {
   display: flex;
-  gap: 0.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  gap: var(--dc-spacing-sm);
+  border-bottom: 1px solid var(--dc-border);
   margin-bottom: var(--dc-spacing-md);
 }
 
 .dc-settings-tabs .tab {
   padding: var(--dc-spacing-sm) var(--dc-spacing-md);
   cursor: pointer;
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
 }
 
 .dc-settings-tabs .tab.active {
-  color: #2563eb;
-  border-bottom: 2px solid #2563eb;
+  color: var(--dc-primary);
+  border-bottom: 2px solid var(--dc-primary);
   font-weight: 600;
 }
 
 .dc-settings-section {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
+  background-color: var(--dc-surface);
+  border: 1px solid var(--dc-border);
+  border-radius: var(--dc-radius);
   padding: var(--dc-spacing-md);
   margin-bottom: var(--dc-spacing-md);
 }
 
 .dc-settings-section h2 {
-  font-size: 1.125rem;
+  font-size: var(--dc-font-lg);
   font-weight: 600;
   margin-top: 0;
   margin-bottom: var(--dc-spacing-sm);
-  color: #111827;
+  color: var(--dc-text);
 }
 
 .dc-settings-section .dc-help-line {
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
   margin-bottom: var(--dc-spacing-sm);
 }
 
@@ -62,9 +62,9 @@
   display: flex;
   gap: var(--dc-spacing-sm);
   padding: var(--dc-spacing-sm) 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--dc-border);
   align-items: center;
-  font-size: 0.875rem;
+  font-size: var(--dc-font-sm);
 }
 
 .dc-team-row:last-child {

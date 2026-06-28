@@ -5,15 +5,15 @@ export default function Sidebar() {
   return (
     <nav
       className="nav flex-column bg-dark text-white"
-      style={{ width: 220, padding: '16px 8px', minHeight: '100vh' }}
+      style={{ width: 220, padding: 'var(--dc-spacing-md) var(--dc-spacing-sm)', minHeight: '100vh' }}
     >
       <div
         style={{
-          padding: '8px 12px',
-          color: '#60a5fa',
+          padding: 'var(--dc-spacing-sm) var(--dc-spacing-smd)',
+          color: 'var(--dc-primary-light)',
           fontWeight: 700,
-          fontSize: 20,
-          marginBottom: 16,
+          fontSize: 'var(--dc-font-xl)',
+          marginBottom: 'var(--dc-spacing-md)',
         }}
       >
         DataCats
@@ -24,7 +24,7 @@ export default function Sidebar() {
           to="/"
           exact
           className="nav-link text-white"
-          activeStyle={{ color: '#1d4ed8', backgroundColor: 'rgba(255,255,255,0.06)' }}
+          activeStyle={{ color: 'var(--dc-primary-hover)', backgroundColor: 'var(--dc-sidebar-active-bg)' }}
         >
           Overview
         </NavLink>
@@ -33,7 +33,7 @@ export default function Sidebar() {
         <NavLink
           to="/users"
           className="nav-link text-white"
-          activeStyle={{ color: '#1d4ed8', backgroundColor: 'rgba(255,255,255,0.06)' }}
+          activeStyle={{ color: 'var(--dc-primary-hover)', backgroundColor: 'var(--dc-sidebar-active-bg)' }}
         >
           Users
         </NavLink>
@@ -42,7 +42,7 @@ export default function Sidebar() {
         <NavLink
           to="/reports"
           className="nav-link text-white"
-          activeStyle={{ color: '#1d4ed8', backgroundColor: 'rgba(255,255,255,0.06)' }}
+          activeStyle={{ color: 'var(--dc-primary-hover)', backgroundColor: 'var(--dc-sidebar-active-bg)' }}
         >
           Reports
         </NavLink>
@@ -51,13 +51,13 @@ export default function Sidebar() {
         <NavLink
           to="/settings"
           className="nav-link text-white"
-          activeStyle={{ color: '#1d4ed8', backgroundColor: 'rgba(255,255,255,0.06)' }}
+          activeStyle={{ color: 'var(--dc-primary-hover)', backgroundColor: 'var(--dc-sidebar-active-bg)' }}
         >
           Settings
         </NavLink>
       </div>
 
-      <div style={{ marginTop: 'auto', padding: '8px 12px', fontSize: 14, opacity: 0.5 }}>
+      <div style={{ marginTop: 'auto', padding: 'var(--dc-spacing-sm) var(--dc-spacing-smd)', fontSize: 'var(--dc-font-sm)', opacity: 0.5 }}>
         v8.2.1
       </div>
     </nav>

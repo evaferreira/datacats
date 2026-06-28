@@ -7,33 +7,33 @@ export default function Card({ title, footer, children }) {
     <div
       className="card"
       style={{
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e7eb',
-        borderRadius: 6,
-        marginBottom: 16,
-        boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+        backgroundColor: 'var(--dc-surface)',
+        border: '1px solid var(--dc-border)',
+        borderRadius: 'var(--dc-radius)',
+        marginBottom: 'var(--dc-spacing-md)',
+        boxShadow: 'var(--dc-shadow)',
       }}
     >
       {title ? (
         <div
           style={{
-            padding: '0.5rem 0.75rem',
-            borderBottom: '1px solid #e5e7eb',
+            padding: 'var(--dc-spacing-sm) var(--dc-spacing-smd)',
+            borderBottom: '1px solid var(--dc-border)',
             fontWeight: 600,
-            fontSize: '1rem',
+            fontSize: 'var(--dc-font-md)',
           }}
         >
           {title}
         </div>
       ) : null}
-      <div style={{ padding: 16 }}>{children}</div>
+      <div style={{ padding: 'var(--dc-spacing-md)' }}>{children}</div>
       {footer ? (
         <div
           style={{
-            padding: '0.5rem 0.75rem',
-            borderTop: '1px solid #e5e7eb',
-            fontSize: 14,
-            color: '#6b7280',
+            padding: 'var(--dc-spacing-sm) var(--dc-spacing-smd)',
+            borderTop: '1px solid var(--dc-border)',
+            fontSize: 'var(--dc-font-sm)',
+            color: 'var(--dc-text-muted)',
           }}
         >
           {footer}

@@ -46,12 +46,12 @@ class UserExportButton extends React.Component {
           {submitting ? 'Exporting…' : 'Export users'}
         </button>
         {lastJobId ? (
-          <span style={{ marginLeft: 8, fontSize: 14, color: '#6b7280' }}>
+          <span style={{ marginLeft: 'var(--dc-spacing-sm)', fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>
             Started job {lastJobId}
           </span>
         ) : null}
         {error ? (
-          <span style={{ marginLeft: 8, fontSize: 14, color: '#b91c1c' }}>{error}</span>
+          <span style={{ marginLeft: 'var(--dc-spacing-sm)', fontSize: 'var(--dc-font-sm)', color: 'var(--dc-danger)' }}>{error}</span>
         ) : null}
       </span>
     )

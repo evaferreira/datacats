@@ -18,17 +18,17 @@ class MetricsSummary extends React.Component {
     return (
       <div className="card">
         <div className="card-body">
-          <div className="card-title" style={{ fontSize: 15, color: '#6b7280', textTransform: 'uppercase' }}>
+          <div className="card-title" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)', textTransform: 'uppercase' }}>
             {title}
           </div>
-          <div className="card-text" style={{ fontSize: '1.375rem', fontWeight: 700 }}>
+          <div className="card-text" style={{ fontSize: 'var(--dc-font-2xl)', fontWeight: 700 }}>
             {this.formatValue(total)}
           </div>
-          <div className="card-text text-muted" style={{ fontSize: 14 }}>
+          <div className="card-text text-muted" style={{ fontSize: 'var(--dc-font-sm)' }}>
             avg {this.formatValue(avg)}
           </div>
         </div>
-        <div className="card-footer text-muted" style={{ fontSize: 14 }}>
+        <div className="card-footer text-muted" style={{ fontSize: 'var(--dc-font-sm)' }}>
           {footnote || 'Aggregated across all active accounts'}
         </div>
       </div>

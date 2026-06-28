@@ -49,12 +49,12 @@ function ActivityFeed() {
           items.map(item => (
             <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
               <span>
-                <span style={{ marginRight: 8 }}>
+                <span style={{ marginRight: 'var(--dc-spacing-sm)' }}>
                   <Badge tone={tone(item.severity)}>{item.type}</Badge>
                 </span>
                 {item.message}
               </span>
-              <span style={{ color: '#6b7280', fontSize: 14 }}>{formatRelativeTime(item.at)}</span>
+              <span style={{ color: 'var(--dc-text-muted)', fontSize: 'var(--dc-font-sm)' }}>{formatRelativeTime(item.at)}</span>
             </li>
           ))
         )}

@@ -34,9 +34,9 @@ class UserFilters extends React.Component {
       <form
         className="form-inline"
         onSubmit={e => e.preventDefault()}
-        style={{ marginBottom: '1rem', gap: '0.5rem', flexWrap: 'wrap' }}
+        style={{ marginBottom: 'var(--dc-spacing-md)', gap: 'var(--dc-spacing-sm)', flexWrap: 'wrap' }}
       >
-        <div className="form-group" style={{ marginRight: 8 }}>
+        <div className="form-group" style={{ marginRight: 'var(--dc-spacing-sm)' }}>
           <input
             type="text"
             className="form-control"
@@ -46,7 +46,7 @@ class UserFilters extends React.Component {
           />
         </div>
 
-        <div className="form-group" style={{ marginRight: 8 }}>
+        <div className="form-group" style={{ marginRight: 'var(--dc-spacing-sm)' }}>
           <select className="form-control" value={filters.plan} onChange={this.handleChange('plan')}>
             <option value="all">All plans</option>
             <option value="starter">Starter</option>
@@ -55,7 +55,7 @@ class UserFilters extends React.Component {
           </select>
         </div>
 
-        <div className="form-group" style={{ marginRight: 8 }}>
+        <div className="form-group" style={{ marginRight: 'var(--dc-spacing-sm)' }}>
           <select className="form-control" value={filters.status} onChange={this.handleChange('status')}>
             <option value="all">All statuses</option>
             <option value="active">Active</option>

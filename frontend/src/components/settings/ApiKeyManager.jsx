@@ -78,7 +78,7 @@ class ApiKeyManager extends React.Component {
             <a href={'mailto:' + SUPPORT_EMAIL}>{SUPPORT_EMAIL}</a>.
           </p>
 
-          <form onSubmit={this.handleCreate} style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+          <form onSubmit={this.handleCreate} style={{ display: 'flex', gap: 'var(--dc-spacing-sm)', marginBottom: 'var(--dc-spacing-md)' }}>
             <input
               type="text"
               className="form-control"
@@ -106,20 +106,20 @@ class ApiKeyManager extends React.Component {
                   <tr key={k.id}>
                     <td>
                       <div style={{ fontWeight: 600 }}>{k.label}</div>
-                      <div style={{ color: '#6b7280', fontSize: 14 }}>{k.id}</div>
+                      <div style={{ color: 'var(--dc-text-muted)', fontSize: 'var(--dc-font-sm)' }}>{k.id}</div>
                     </td>
                     <td>
                       {(k.scopes || []).map(s => (
-                        <span key={s} style={{ marginRight: 4 }}>{this.scopeBadge(s)}</span>
+                        <span key={s} style={{ marginRight: 'var(--dc-spacing-xs)' }}>{this.scopeBadge(s)}</span>
                       ))}
                     </td>
-                    <td style={{ fontSize: 14, color: '#6b7280' }}>{k.lastUsed || '—'}</td>
+                    <td style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>{k.lastUsed || '—'}</td>
                     <td>
                       <button
                         type="button"
                         className="btn btn-sm btn-link"
                         onClick={() => this.handleDelete(k.id)}
-                        style={{ color: '#b91c1c' }}
+                        style={{ color: 'var(--dc-danger)' }}
                       >
                         Revoke
                       </button>
@@ -138,10 +138,10 @@ class ApiKeyManager extends React.Component {
             {previewLoading ? 'Loading preview…' : 'Preview export data'}
           </button>
           {previewError ? (
-            <div style={{ color: '#b91c1c', fontSize: 14, marginTop: 8 }}>{previewError}</div>
+            <div style={{ color: 'var(--dc-danger)', fontSize: 'var(--dc-font-sm)', marginTop: 'var(--dc-spacing-sm)' }}>{previewError}</div>
           ) : null}
           {previewText ? (
-            <pre style={{ marginTop: 12, padding: 12, backgroundColor: '#f9fafb', fontSize: 14, overflowX: 'auto' }}>
+            <pre style={{ marginTop: 'var(--dc-spacing-smd)', padding: 'var(--dc-spacing-smd)', backgroundColor: 'var(--dc-bg)', fontSize: 'var(--dc-font-sm)', overflowX: 'auto' }}>
               {previewText}
             </pre>
           ) : null}

@@ -14,7 +14,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:tokens": "bash scripts/check-design-tokens.sh",
+    "lint:css": "stylelint \"src/**/*.css\""
   },
   "eslintConfig": {
     "extends": [
@@ -37,6 +39,8 @@
   "devDependencies": {
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
-    "@testing-library/user-event": "13.5.0"
+    "@testing-library/user-event": "13.5.0",
+    "stylelint": "16.26.1",
+    "stylelint-declaration-strict-value": "1.11.1"
   }
 }

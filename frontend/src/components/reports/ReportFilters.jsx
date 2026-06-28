@@ -33,9 +33,9 @@ class ReportFilters extends React.Component {
   render() {
     const { filters } = this.state
     return (
-      <form className="form-row" onSubmit={e => e.preventDefault()} style={{ marginBottom: '1rem' }}>
+      <form className="form-row" onSubmit={e => e.preventDefault()} style={{ marginBottom: 'var(--dc-spacing-md)' }}>
         <div className="form-group col-auto">
-          <label style={{ fontSize: 14, color: '#6b7280' }}>Start</label>
+          <label style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Start</label>
           <input
             type="date"
             className="form-control"
@@ -44,7 +44,7 @@ class ReportFilters extends React.Component {
           />
         </div>
         <div className="form-group col-auto">
-          <label style={{ fontSize: 14, color: '#6b7280' }}>End</label>
+          <label style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>End</label>
           <input
             type="date"
             className="form-control"
@@ -53,7 +53,7 @@ class ReportFilters extends React.Component {
           />
         </div>
         <div className="form-group col-auto">
-          <label style={{ fontSize: 14, color: '#6b7280' }}>Plan</label>
+          <label style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Plan</label>
           <select className="form-control" value={filters.plan} onChange={this.handleChange('plan')}>
             <option value="all">All</option>
             <option value="starter">Starter</option>

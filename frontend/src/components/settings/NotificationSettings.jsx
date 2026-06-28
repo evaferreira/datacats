@@ -33,10 +33,10 @@ export default function NotificationSettings() {
 
   return (
     <Card title="Notifications" footer={message ? <span>{message}</span> : null}>
-      <p className="dc-help-line" style={{ marginBottom: 12 }}>
+      <p className="dc-help-line" style={{ marginBottom: 'var(--dc-spacing-smd)' }}>
         Choose how and when DataCats contacts you.
       </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--dc-spacing-sm)' }}>
         <label>
           <input type="checkbox" checked={!!prefs.emailDigestDaily} onChange={() => toggle('emailDigestDaily')} />{' '}
           Daily email digest
@@ -58,7 +58,7 @@ export default function NotificationSettings() {
           In-app @mentions
         </label>
       </div>
-      <div style={{ marginTop: 16 }}>
+      <div style={{ marginTop: 'var(--dc-spacing-md)' }}>
         <Button variant="primary" onClick={save} disabled={saving}>
           {saving ? 'Saving…' : 'Save preferences'}
         </Button>

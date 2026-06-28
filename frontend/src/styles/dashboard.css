@@ -1,86 +1,86 @@
 /* dashboard.css — overview page styles */
 
 .dc-dashboard {
-  padding: 16px;
+  padding: var(--dc-spacing-md);
 }
 
 .dc-dashboard h1 {
-  color: #2563eb;
-  font-size: 1.625rem;
-  margin-bottom: 0.5rem;
+  color: var(--dc-primary);
+  font-size: var(--dc-font-3xl);
+  margin-bottom: var(--dc-spacing-sm);
 }
 
 .dc-dashboard .dc-subtitle {
-  font-size: 15px;
-  color: #6b7280;
-  margin-bottom: 24px;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
+  margin-bottom: var(--dc-spacing-lg);
 }
 
 .dc-metric-row {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: var(--dc-spacing-md);
+  margin-bottom: var(--dc-spacing-md);
   flex-wrap: wrap;
 }
 
 .dc-metric-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  padding: 16px;
+  background-color: var(--dc-surface);
+  border: 1px solid var(--dc-border);
+  border-radius: var(--dc-radius);
+  padding: var(--dc-spacing-md);
   flex: 1 1 200px;
   min-width: 180px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--dc-shadow);
 }
 
 .dc-metric-card .label {
-  font-size: 15px;
-  color: #6b7280;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .dc-metric-card .value {
-  font-size: 1.625rem;
+  font-size: var(--dc-font-3xl);
   font-weight: 700;
-  color: #2563eb;
-  margin-top: 0.25rem;
+  color: var(--dc-primary);
+  margin-top: var(--dc-spacing-xs);
 }
 
-.dc-metric-card .delta-up   { color: #15803d; font-size: 15px; }
-.dc-metric-card .delta-down { color: #b91c1c; font-size: 15px; }
+.dc-metric-card .delta-up   { color: var(--dc-success); font-size: var(--dc-font-sm); }
+.dc-metric-card .delta-down { color: var(--dc-danger); font-size: var(--dc-font-sm); }
 
 .dc-chart-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  margin-bottom: 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: var(--dc-surface);
+  border: 1px solid var(--dc-border);
+  border-radius: var(--dc-radius);
+  margin-bottom: var(--dc-spacing-md);
+  box-shadow: var(--dc-shadow);
 }
 
 .dc-chart-card .chart-header {
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
+  border-bottom: 1px solid var(--dc-border);
   font-weight: 600;
-  color: #2563eb;
-  font-size: 15px;
+  color: var(--dc-primary);
+  font-size: var(--dc-font-sm);
 }
 
 .dc-chart-card .chart-body {
-  padding: 16px;
+  padding: var(--dc-spacing-md);
 }
 
 .dc-activity {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  padding: 8px 12px;
+  background-color: var(--dc-surface);
+  border: 1px solid var(--dc-border);
+  border-radius: var(--dc-radius);
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
 }
 
 .dc-activity .item {
-  padding: 8px 0;
-  border-bottom: 1px solid #e5e7eb;
-  font-size: 15px;
+  padding: var(--dc-spacing-sm) 0;
+  border-bottom: 1px solid var(--dc-border);
+  font-size: var(--dc-font-sm);
 }
 
 .dc-activity .item:last-child {
@@ -88,17 +88,17 @@
 }
 
 .dc-activity .ts {
-  color: #6b7280;
-  font-size: 15px;
+  color: var(--dc-text-muted);
+  font-size: var(--dc-font-sm);
   float: right;
 }
 
 /* legacy — used to show a "BETA" banner on the dashboard */
 .dc-beta-banner {
-  background: #fef3c7;
-  color: #92400e;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 15px;
-  margin-bottom: 16px;
+  background: var(--dc-warning-bg);
+  color: var(--dc-warning-fg);
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
+  border-radius: var(--dc-radius);
+  font-size: var(--dc-font-sm);
+  margin-bottom: var(--dc-spacing-md);
 }

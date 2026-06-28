@@ -54,11 +54,11 @@ export default function UsersPage() {
       <h1>Users</h1>
       <p className="dc-users-subtitle">{filtered.length} of {users.length} customers</p>
 
-      <div className="row" style={{ marginBottom: 16 }}>
+      <div className="row" style={{ marginBottom: 'var(--dc-spacing-md)' }}>
         <div className="col">
           <UserFilters onFiltersChange={setFilters} />
         </div>
-        <div className="col-auto" style={{ display: 'flex', gap: 8, alignSelf: 'center' }}>
+        <div className="col-auto" style={{ display: 'flex', gap: 'var(--dc-spacing-sm)', alignSelf: 'center' }}>
           <UserExportButton filters={filters} />
           <button type="button" className="btn btn-primary">Invite user</button>
           <button type="button" className="btn btn-outline-secondary">Refresh</button>
@@ -68,7 +68,7 @@ export default function UsersPage() {
       {loading ? (
         <div className="dc-loading">Loading users…</div>
       ) : error ? (
-        <div style={{ color: '#b91c1c' }}>{error}</div>
+        <div style={{ color: 'var(--dc-danger)' }}>{error}</div>
       ) : (
         <UserTable data={filtered} />
       )}

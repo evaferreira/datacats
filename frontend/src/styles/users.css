@@ -1,61 +1,61 @@
 /* users.css — Users page */
 
 .dc-users {
-  padding: 1rem;
+  padding: var(--dc-spacing-md);
 }
 
 .dc-users h1 {
-  color: #3b82f6;
-  font-size: 1.625rem;
-  margin-bottom: 0.5rem;
+  color: var(--dc-primary);
+  font-size: var(--dc-font-3xl);
+  margin-bottom: var(--dc-spacing-sm);
 }
 
 .dc-users .dc-users-subtitle {
-  font-size: 0.925rem;
-  color: #6b7280;
-  margin-bottom: 1rem;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
+  margin-bottom: var(--dc-spacing-md);
 }
 
 .dc-users-toolbar {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--dc-spacing-sm);
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--dc-spacing-md);
   flex-wrap: wrap;
 }
 
 .dc-users-toolbar input,
 .dc-users-toolbar select {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 0.925rem;
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
+  border: 1px solid var(--dc-border);
+  border-radius: var(--dc-radius);
+  font-size: var(--dc-font-sm);
 }
 
 .dc-users-table {
   width: 100%;
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
+  background-color: var(--dc-surface);
+  border: 1px solid var(--dc-border);
+  border-radius: var(--dc-radius);
   overflow: hidden;
 }
 
 .dc-users-table th {
   text-align: left;
-  font-size: 0.925rem;
+  font-size: var(--dc-font-sm);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #6b7280;
-  padding: 0.5rem 0.75rem;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  color: var(--dc-text-muted);
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
+  background: var(--dc-bg);
+  border-bottom: 1px solid var(--dc-border);
   cursor: pointer;
 }
 
 .dc-users-table td {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.925rem;
-  border-bottom: 1px solid #e5e7eb;
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
+  font-size: var(--dc-font-sm);
+  border-bottom: 1px solid var(--dc-border);
 }
 
 .dc-users-table tr:last-child td {
@@ -63,40 +63,40 @@
 }
 
 .dc-users-table tr:hover {
-  background-color: #f9fafb;
+  background-color: var(--dc-bg);
 }
 
 .dc-user-name {
   font-weight: 600;
-  color: #3b82f6;
+  color: var(--dc-primary);
 }
 
 .dc-user-email {
-  color: #6b7280;
-  font-size: 0.925rem;
+  color: var(--dc-text-muted);
+  font-size: var(--dc-font-sm);
 }
 
 .dc-user-health-bar {
   height: 4px;
-  background-color: #e5e7eb;
-  border-radius: 999px;
+  background-color: var(--dc-border);
+  border-radius: var(--dc-radius-pill);
   overflow: hidden;
   width: 60px;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 0.5rem;
+  margin-right: var(--dc-spacing-sm);
 }
 
 .dc-user-health-bar > .fill {
   height: 100%;
-  background-color: #3b82f6;
+  background-color: var(--dc-primary);
 }
 
 .dc-pagination {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--dc-spacing-sm);
   justify-content: flex-end;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.925rem;
-  color: #6b7280;
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
 }

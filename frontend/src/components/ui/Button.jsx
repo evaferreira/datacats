@@ -6,14 +6,14 @@ import React from 'react'
 export default function Button({ variant, onClick, type, disabled, children }) {
   const styles = {
     primary: {
-      backgroundColor: '#2563eb',
-      color: '#ffffff',
-      border: '1px solid #2563eb',
+      backgroundColor: 'var(--dc-primary)',
+      color: 'var(--dc-text-inverse)',
+      border: '1px solid var(--dc-primary)',
     },
     secondary: {
-      backgroundColor: '#ffffff',
-      color: '#111827',
-      border: '1px solid #e5e7eb',
+      backgroundColor: 'var(--dc-surface)',
+      color: 'var(--dc-text)',
+      border: '1px solid var(--dc-border)',
     },
   }
 
@@ -26,9 +26,9 @@ export default function Button({ variant, onClick, type, disabled, children }) {
       disabled={disabled}
       style={{
         ...variantStyle,
-        padding: '0.5rem 0.75rem',
-        borderRadius: 6,
-        fontSize: '1rem',
+        padding: 'var(--dc-spacing-sm) var(--dc-spacing-smd)',
+        borderRadius: 'var(--dc-radius)',
+        fontSize: 'var(--dc-font-md)',
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.6 : 1,
       }}

@@ -51,7 +51,7 @@ function MetricsCard(props) {
       <div className="card">
         <div className="card-body">
           <div className="card-title">{title}</div>
-          <div className="card-text" style={{ color: '#b91c1c' }}>{error}</div>
+          <div className="card-text" style={{ color: 'var(--dc-danger)' }}>{error}</div>
         </div>
       </div>
     )
@@ -65,16 +65,16 @@ function MetricsCard(props) {
   return (
     <div className="card">
       <div className="card-body">
-        <div className="card-title" style={{ fontSize: 15, color: '#6b7280', textTransform: 'uppercase' }}>
+        <div className="card-title" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)', textTransform: 'uppercase' }}>
           {title}
         </div>
-        <div className="card-text" style={{ fontSize: '1.625rem', fontWeight: 700, color: '#2563eb' }}>
+        <div className="card-text" style={{ fontSize: 'var(--dc-font-3xl)', fontWeight: 700, color: 'var(--dc-primary)' }}>
           {formatValue(current)}
         </div>
         {delta !== null ? (
           <div
             className="card-text"
-            style={{ fontSize: 15, color: delta >= 0 ? '#15803d' : '#b91c1c' }}
+            style={{ fontSize: 'var(--dc-font-sm)', color: delta >= 0 ? 'var(--dc-success)' : 'var(--dc-danger)' }}
           >
             {delta >= 0 ? '▲' : '▼'} {(Math.abs(delta) * 100).toFixed(1)}% vs prev
           </div>

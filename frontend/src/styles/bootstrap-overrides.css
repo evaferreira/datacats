@@ -1,49 +1,48 @@
 /* bootstrap-overrides.css
- * Partial Bootstrap 4 overrides — never finished.
- * "this is terrible but it works"
+ * Partial Bootstrap 4 overrides. Colors/sizes reference design tokens (see main.css).
  */
 
 .btn-primary {
-  background-color: #2460e8;
-  border-color: #2460e8;
-  font-size: 0.975rem;
+  background-color: var(--dc-primary);
+  border-color: var(--dc-primary);
+  font-size: var(--dc-font-sm);
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-  background-color: #1d4ed8;
-  border-color: #1d4ed8;
+  background-color: var(--dc-primary-hover);
+  border-color: var(--dc-primary-hover);
 }
 
 .btn-outline-secondary {
-  font-size: 0.975rem;
+  font-size: var(--dc-font-sm);
 }
 
 .card {
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: var(--dc-radius);
+  box-shadow: var(--dc-shadow);
 }
 
 .card-header {
-  background-color: #f9fafb;
-  font-size: 0.975rem;
+  background-color: var(--dc-bg);
+  font-size: var(--dc-font-sm);
   font-weight: 600;
 }
 
 .table thead th {
-  font-size: 0.975rem;
+  font-size: var(--dc-font-sm);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #6b7280;
+  color: var(--dc-text-muted);
 }
 
 .form-control {
-  font-size: 0.975rem;
+  font-size: var(--dc-font-sm);
 }
 
 .nav-tabs .nav-link.active {
-  color: #2460e8;
-  border-bottom-color: #2460e8;
+  color: var(--dc-primary);
+  border-bottom-color: var(--dc-primary);
 }
 
 /* kill all chart animations (recharts) */

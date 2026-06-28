@@ -1,25 +1,67 @@
 /* ==========================================================================
  * DataCats global styles
  * Author: Jake – Dec 2019, edited by Sarah – 2021, edited by the platform team – 2024
+ *
+ * Design tokens live in the :root block below and are the single source of truth
+ * for color, spacing, radius, and type. Never hardcode a hex/rgb/px literal in CSS
+ * or in an inline style — reference a token via var(--dc-*). If a value you need is
+ * missing, add a token here first, then use it. See frontend/CLAUDE.md.
  * ========================================================================== */
 
 :root {
+  /* color — brand */
   --dc-primary: #2563eb;
   --dc-primary-hover: #1d4ed8;
+  --dc-primary-light: #60a5fa;   /* light accent on dark backgrounds (sidebar) */
+  --dc-primary-tint: #f0f7ff;    /* selected-row highlight */
+
+  /* color — text & surfaces */
   --dc-text: #111827;
+  --dc-text-secondary: #374151;  /* darker-than-muted heading text */
   --dc-text-muted: #6b7280;
+  --dc-text-inverse: #ffffff;    /* text on a colored/dark background */
   --dc-bg: #f9fafb;
   --dc-surface: #ffffff;
   --dc-border: #e5e7eb;
+
+  /* color — status */
+  --dc-success: #15803d;         /* solid success text (e.g. positive delta) */
+  --dc-success-bg: #d1fae5;
+  --dc-success-fg: #065f46;
+  --dc-warning-bg: #fef3c7;
+  --dc-warning-fg: #92400e;
+  --dc-danger: #b91c1c;          /* solid danger/error text */
+  --dc-danger-bg: #fee2e2;
+  --dc-danger-fg: #991b1b;
+  --dc-info-bg: #dbeafe;
+  --dc-info-fg: #1d4ed8;
+
+  /* effects */
+  --dc-overlay: rgba(0, 0, 0, 0.4);            /* modal scrim */
+  --dc-sidebar-active-bg: rgba(255, 255, 255, 0.06);
+  --dc-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  /* spacing */
+  --dc-spacing-2xs: 2px;
   --dc-spacing-xs: 4px;
   --dc-spacing-sm: 8px;
+  --dc-spacing-smd: 12px;        /* dense step: input/table-cell padding */
   --dc-spacing-md: 16px;
   --dc-spacing-lg: 24px;
   --dc-spacing-xl: 32px;
+
+  /* radius */
   --dc-radius: 6px;
-  --dc-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --dc-font-sm: 0.875rem;
-  --dc-font-md: 1rem;
+  --dc-radius-pill: 999px;
+
+  /* typography */
+  --dc-font-xs: 0.8125rem;       /* 13px — dense tables */
+  --dc-font-sm: 0.875rem;        /* 14px — body / labels */
+  --dc-font-md: 1rem;            /* 16px — base */
+  --dc-font-lg: 1.125rem;        /* 18px */
+  --dc-font-xl: 1.25rem;         /* 20px */
+  --dc-font-2xl: 1.375rem;       /* 22px */
+  --dc-font-3xl: 1.625rem;       /* 26px — page titles */
 }
 
 * {
@@ -30,9 +72,9 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  color: #111827;
-  background-color: #f9fafb;
+  font-size: var(--dc-font-md);
+  color: var(--dc-text);
+  background-color: var(--dc-bg);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -42,7 +84,7 @@ a {
 }
 
 a:hover {
-  color: #1d4ed8;
+  color: var(--dc-primary-hover);
   text-decoration: underline;
 }
 
@@ -61,41 +103,40 @@ a:hover {
 
 .dc-app-shell .dc-content {
   flex: 1;
-  padding: 24px;
-  background-color: #f9fafb;
+  padding: var(--dc-spacing-lg);
+  background-color: var(--dc-bg);
 }
 
 /* page headings */
 .dc-page-title {
-  font-size: 1.625rem;
+  font-size: var(--dc-font-3xl);
   font-weight: 600;
-  margin-bottom: 16px;
-  color: #111827;
+  margin-bottom: var(--dc-spacing-md);
+  color: var(--dc-text);
 }
 
 .dc-page-subtitle {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 24px;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
+  margin-bottom: var(--dc-spacing-lg);
 }
 
 .dc-section-title {
-  font-size: 1.25rem;
+  font-size: var(--dc-font-xl);
   font-weight: 600;
-  margin-top: 1rem;
+  margin-top: var(--dc-spacing-md);
   margin-bottom: var(--dc-spacing-sm);
-  border-color: #1e56d9;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 8px;
+  border-bottom: 1px solid var(--dc-border);
+  padding-bottom: var(--dc-spacing-sm);
 }
 
 /* utility helpers */
 .dc-muted {
-  color: #6b7280;
+  color: var(--dc-text-muted);
 }
 
 .dc-text-small {
-  font-size: 14px;
+  font-size: var(--dc-font-sm);
 }
 
 .dc-text-bold {
@@ -107,7 +148,7 @@ a:hover {
 }
 
 .dc-mb-md {
-  margin-bottom: 16px;
+  margin-bottom: var(--dc-spacing-md);
 }
 
 .dc-flex {
@@ -122,41 +163,41 @@ a:hover {
 }
 
 .dc-gap-sm {
-  gap: 8px;
+  gap: var(--dc-spacing-sm);
 }
 
 .dc-gap-md {
-  gap: 1rem;
+  gap: var(--dc-spacing-md);
 }
 
 /* surface tiles */
 .dc-tile {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: var(--dc-surface);
+  border: 1px solid var(--dc-border);
+  border-radius: var(--dc-radius);
+  padding: var(--dc-spacing-sm) var(--dc-spacing-smd);
+  box-shadow: var(--dc-shadow);
 }
 
 /* status pills (legacy — predates Bootstrap badge usage) */
 .dc-pill {
   display: inline-block;
-  padding: 2px 8px;
-  font-size: 14px;
-  border-radius: 999px;
-  background-color: #e5e7eb;
-  color: #111827;
+  padding: var(--dc-spacing-2xs) var(--dc-spacing-sm);
+  font-size: var(--dc-font-sm);
+  border-radius: var(--dc-radius-pill);
+  background-color: var(--dc-border);
+  color: var(--dc-text);
 }
 
-.dc-pill-success { background-color: #d1fae5; color: #065f46; }
-.dc-pill-warning { background-color: #fef3c7; color: #92400e; }
-.dc-pill-danger  { background-color: #fee2e2; color: #991b1b; }
+.dc-pill-success { background-color: var(--dc-success-bg); color: var(--dc-success-fg); }
+.dc-pill-warning { background-color: var(--dc-warning-bg); color: var(--dc-warning-fg); }
+.dc-pill-danger  { background-color: var(--dc-danger-bg); color: var(--dc-danger-fg); }
 
 /* form misc */
 .dc-form-row {
   display: flex;
-  gap: 8px;
-  margin-bottom: 1rem;
+  gap: var(--dc-spacing-sm);
+  margin-bottom: var(--dc-spacing-md);
 }
 
 .dc-form-row > * {
@@ -164,35 +205,35 @@ a:hover {
 }
 
 .dc-help-text {
-  font-size: 14px;
-  color: #6b7280;
-  margin-top: 4px;
+  font-size: var(--dc-font-sm);
+  color: var(--dc-text-muted);
+  margin-top: var(--dc-spacing-xs);
 }
 
 /* tables */
 .dc-table-empty {
-  padding: 24px;
+  padding: var(--dc-spacing-lg);
   text-align: center;
-  color: #6b7280;
-  font-size: 14px;
+  color: var(--dc-text-muted);
+  font-size: var(--dc-font-sm);
 }
 
 /* loading */
 .dc-loading {
-  padding: 16px;
-  color: #6b7280;
+  padding: var(--dc-spacing-md);
+  color: var(--dc-text-muted);
   font-style: italic;
 }
 
 /* misc legacy */
 .dc-divider {
   height: 1px;
-  background-color: #e5e7eb;
+  background-color: var(--dc-border);
   margin: var(--dc-spacing-md) 0;
 }
 
 .dc-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  gap: var(--dc-spacing-md);
 }

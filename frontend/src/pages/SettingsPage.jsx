@@ -51,7 +51,7 @@ export default function SettingsPage() {
         </li>
       </ul>
 
-      <div className="tab-content" style={{ paddingTop: 16 }}>
+      <div className="tab-content" style={{ paddingTop: 'var(--dc-spacing-md)' }}>
         <div className={'tab-pane' + (tab === 'team' ? ' active' : '')} style={{ display: tab === 'team' ? 'block' : 'none' }}>
           <TeamSettings />
         </div>

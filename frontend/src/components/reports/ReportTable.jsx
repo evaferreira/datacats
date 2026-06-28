@@ -81,7 +81,7 @@ class ReportTable extends React.Component {
               rows.map((row, i) => (
                 <tr
                   key={row.id || i}
-                  style={selectedRows[row.id || i] ? { backgroundColor: '#f0f7ff' } : null}
+                  style={selectedRows[row.id || i] ? { backgroundColor: 'var(--dc-primary-tint)' } : null}
                   onClick={() => this.handleToggleRow(row.id || i)}
                 >
                   {columns.map(c => (

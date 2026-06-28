@@ -30,7 +30,7 @@ function UserRow(props) {
   const onToggle = props.onToggle
 
   return (
-    <tr style={selected ? { backgroundColor: '#f0f7ff' } : null}>
+    <tr style={selected ? { backgroundColor: 'var(--dc-primary-tint)' } : null}>
       <td>
         <input type="checkbox" checked={selected} onChange={onToggle} aria-label={'Select ' + u.name} />
       </td>

@@ -1,11 +1,12 @@
 import React from 'react'
 
+// Tone -> design tokens. Keep these aligned with the .dc-pill-* classes in main.css.
 const PALETTE = {
-  neutral: { bg: '#e5e7eb', fg: '#111827' },
-  success: { bg: '#d1fae5', fg: '#065f46' },
-  warning: { bg: '#fef3c7', fg: '#92400e' },
-  danger:  { bg: '#fee2e2', fg: '#991b1b' },
-  info:    { bg: '#dbeafe', fg: '#1d4ed8' },
+  neutral: { bg: 'var(--dc-border)', fg: 'var(--dc-text)' },
+  success: { bg: 'var(--dc-success-bg)', fg: 'var(--dc-success-fg)' },
+  warning: { bg: 'var(--dc-warning-bg)', fg: 'var(--dc-warning-fg)' },
+  danger:  { bg: 'var(--dc-danger-bg)', fg: 'var(--dc-danger-fg)' },
+  info:    { bg: 'var(--dc-info-bg)', fg: 'var(--dc-info-fg)' },
 }
 
 export default function Badge({ tone, children }) {
@@ -16,11 +17,11 @@ export default function Badge({ tone, children }) {
       data-tone={resolvedTone}
       style={{
         display: 'inline-block',
-        padding: '2px 8px',
+        padding: 'var(--dc-spacing-2xs) var(--dc-spacing-sm)',
         backgroundColor: colors.bg,
         color: colors.fg,
-        borderRadius: 999,
-        fontSize: 14,
+        borderRadius: 'var(--dc-radius-pill)',
+        fontSize: 'var(--dc-font-sm)',
         fontWeight: 500,
       }}
     >

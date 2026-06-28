@@ -113,7 +113,7 @@ class TeamSettings extends React.Component {
           <p className="dc-help-line">Invite team members to view or edit DataCats data.</p>
           <form onSubmit={this.handleInvite}>
             <div className="form-group">
-              <label htmlFor="invite-email" style={{ fontSize: 14, color: '#6b7280' }}>Email</label>
+              <label htmlFor="invite-email" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Email</label>
               <input
                 id="invite-email"
                 type="email"
@@ -124,7 +124,7 @@ class TeamSettings extends React.Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="invite-name" style={{ fontSize: 14, color: '#6b7280' }}>Name (optional)</label>
+              <label htmlFor="invite-name" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Name (optional)</label>
               <input
                 id="invite-name"
                 type="text"
@@ -135,7 +135,7 @@ class TeamSettings extends React.Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="invite-role" style={{ fontSize: 14, color: '#6b7280' }}>Role</label>
+              <label htmlFor="invite-role" style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>Role</label>
               <select
                 id="invite-role"
                 className="form-control"
@@ -148,7 +148,7 @@ class TeamSettings extends React.Component {
               </select>
             </div>
             {inviteError ? (
-              <div className="form-group" style={{ color: '#b91c1c', fontSize: 14 }}>{inviteError}</div>
+              <div className="form-group" style={{ color: 'var(--dc-danger)', fontSize: 'var(--dc-font-sm)' }}>{inviteError}</div>
             ) : null}
             <button type="submit" className="btn btn-primary" disabled={inviteSubmitting}>
               {inviteSubmitting ? 'Sending…' : 'Send invitation'}
@@ -159,7 +159,7 @@ class TeamSettings extends React.Component {
         <div className="dc-settings-section">
           <h2>Current team</h2>
           {message ? (
-            <div style={{ fontSize: 14, color: '#15803d', marginBottom: 8 }}>{message}</div>
+            <div style={{ fontSize: 'var(--dc-font-sm)', color: 'var(--dc-success)', marginBottom: 'var(--dc-spacing-sm)' }}>{message}</div>
           ) : null}
           {team.length === 0 ? (
             <div className="dc-help-line">No teammates yet.</div>
@@ -168,10 +168,10 @@ class TeamSettings extends React.Component {
               <div className="dc-team-row" key={member.id}>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 600 }}>{member.name}</div>
-                  <div style={{ color: '#6b7280' }}>{member.email}</div>
+                  <div style={{ color: 'var(--dc-text-muted)' }}>{member.email}</div>
                 </div>
                 <div style={{ width: 100 }}>{this.roleLabel(member.role)}</div>
-                <div style={{ width: 140, color: '#6b7280' }}>
+                <div style={{ width: 140, color: 'var(--dc-text-muted)' }}>
                   Joined {this.formatInvitedAt(member.invitedAt)}
                 </div>
                 <div>
@@ -191,21 +191,21 @@ class TeamSettings extends React.Component {
         {removeModalFor ? (
           <div
             className="modal"
-            style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.4)', position: 'fixed', inset: 0 }}
+            style={{ display: 'block', backgroundColor: 'var(--dc-overlay)', position: 'fixed', inset: 0 }}
             onClick={this.closeRemoveModal}
           >
             <div
               className="modal-dialog"
-              style={{ background: '#fff', maxWidth: 420, margin: '10vh auto', borderRadius: 6 }}
+              style={{ background: 'var(--dc-surface)', maxWidth: 420, margin: '10vh auto', borderRadius: 'var(--dc-radius)' }}
               onClick={e => e.stopPropagation()}
             >
-              <div style={{ padding: 16, borderBottom: '1px solid #e5e7eb' }}>
+              <div style={{ padding: 'var(--dc-spacing-md)', borderBottom: '1px solid var(--dc-border)' }}>
                 <strong>Remove {removeModalFor.name}?</strong>
               </div>
-              <div style={{ padding: 16, fontSize: 15, color: '#6b7280' }}>
+              <div style={{ padding: 'var(--dc-spacing-md)', fontSize: 'var(--dc-font-sm)', color: 'var(--dc-text-muted)' }}>
                 They will lose access to DataCats immediately.
               </div>
-              <div style={{ padding: 16, display: 'flex', gap: 8, justifyContent: 'flex-end', borderTop: '1px solid #e5e7eb' }}>
+              <div style={{ padding: 'var(--dc-spacing-md)', display: 'flex', gap: 'var(--dc-spacing-sm)', justifyContent: 'flex-end', borderTop: '1px solid var(--dc-border)' }}>
                 <button type="button" className="btn btn-secondary" onClick={this.closeRemoveModal}>
                   Cancel
                 </button>
