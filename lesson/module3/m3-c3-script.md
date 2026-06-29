@@ -1,6 +1,6 @@
 # Clip 3: Planning Cross-Cutting Changes — Script Draft
 
-**Total clip duration:** ~5:15 min — **Demo portion:** ~3:00 (narrated live, not scripted here) — **Spoken slide budget:** ~2:15 min (315 words at Eva's 140 wpm pace) — **Voice:** Eva — collaborative, warm, direct, conversational — **Threaded thesis:** *the safest, cheapest cross-cutting change is the one we never have to make — so plan to retire, not migrate* — **Outline coverage status:** all slide bullets covered (map dependencies, retire-vs-migrate, reduce scope, checklists/milestones/phased rollouts/rollback); demo intentionally unscripted.
+**Total clip duration:** ~5:05 min (recorded) — **Demo portion:** ~2:48 (recorded; voiceover transcribed below — 407 words at ~145 wpm) — **Spoken slide budget:** ~2:15 min (315 words at Eva's 140 wpm pace) — **Voice:** Eva — collaborative, warm, direct, conversational — **Threaded thesis:** *the safest, cheapest cross-cutting change is the one we never have to make — so plan to retire, not migrate* — **Outline coverage status:** all slide bullets covered (map dependencies, retire-vs-migrate, reduce scope, checklists/milestones/phased rollouts/rollback); demo recorded and transcribed below.
 
 ---
 
@@ -30,24 +30,25 @@ So let's take a set of obsolete endpoints and turn them into an executable retir
 
 [demo time]
 
-<!-- Demo not scripted — narrated live over the screen recording. Outcome: map → decide → sequence, producing DECOMMISSION_PLAN.md. Full brief: lesson/08-m3-c3-cross-cutting-plan.md.
+Earlier, we identified a few of the unused endpoints on our repository. We have asked our AI agent to create an endpoint registry markdown file at the root of the repository and categorize them, so we can understand which ones could be removed.
 
-     Beats:
-       1. (~1 min) MAP. Feed AI the obsolete endpoints (ENDPOINT_REGISTRY.md). For each: where it's mounted
-          (server.js), what it returns, every caller, what breaks on removal. Classify retire / migrate / keep.
-       2. (~1 min) DECIDE + cut scope. Everything here is retire — obsolete since 2022. The two zombies are fake
-          (hardcoded CSV at ApiKeyManager.jsx:57; no-op job at UserExportButton.jsx:16), so we retire the features,
-          not rebuild them. That's the scope cut.
-       3. (~1 min) SEQUENCE. AI writes DECOMMISSION_PLAN.md:
-            Phase 0 — neutralize the callers first (ships before any route is deleted)
-            Phase 1 — delete the 4 truly-dead routes (no callers)
-            Phase 2 — remove the legacy/export module, its mount + require, and the dead utils/legacyExport.js
-          Plus: milestone per phase, a checklist, verification (logger shows zero hits before delete), rollback
-          (per-phase commits + git revert).
+Out of our 28 endpoints, there are a few that are confirmed dead that we can safely remove. Next, there are a few that are considered zombies which we could remove, but not before understanding a little bit more about the current code and the places where they are being referenced from.
 
-     Voiceover thread: "The callers come down first, the routes second, the module last. That sequence is the whole game."
-     Watch: plan only — no deletions this clip.
--->
+So, let's go ahead and ask our coding agent to review this list of endpoints and classify them correctly. Should we remove them entirely? Or should we migrate them to another supported endpoint? Let's be very clear about those two zombie ones: we need to do extra research into the UI, see where those features are being used, and decide whether they're worth keeping or we should retire them.
+
+All right, once that is done, it first helps us confirm which endpoints can be completely retired. Next, it does a deep dive into those two zombie calls — it recommends migrating the first one before retiring it; for the second, it recommends retiring it immediately.
+
+Finally, let's ask it to create a decommission plan based on this research, with phased, reversible steps. We'll ask it to include a checklist, a verification plan, and a rollback plan. Let's make sure to mention not to change any code yet — we just want the plan.
+
+The result is a markdown file with a set of guiding principles to make sure these changes are safe and reversible. These include, among others, recommendations like one PR per phase and manual verification.
+
+Next, it breaks down the work into phases. Phase 0 is preparation: creating a new branch, running the app, and confirming the assumptions about those two zombie calls. Phase 1 is to decouple the UI from those legacy endpoints. Phase 2 is removing the truly dead endpoints. Phase 3 is removing the legacy modules. And finally, Phase 4 is updating the docs we use to track this work.
+
+In each of these phases, the planning includes a verification strategy, so that while we manually test the application, we don't face any regressions.
+
+Stepping back, notice how much of this plan is about retiring these endpoints, not migrating them — which is really the whole point.
+
+<!-- Demo recorded — the voiceover is transcribed above. Original planning brief: lesson/08-m3-c3-cross-cutting-plan.md. (Note: the recorded plan came out in 5 phases (0–4), not the brief's planned 0/1/2 — the transcript above is the source of truth.) -->
 
 [back to slides]
 
@@ -57,9 +58,9 @@ The big lesson here is that the safest migration is the one you never perform.
 
 ## Notes for Eva
 
-- **Word count (spoken, slides only):** 315 words — roughly 2:15 of slide time at your 140 wpm pace. Paired with a ~3:00 demo, the clip lands around 5:15.
-- **Safest cut if running long:** slide 5's artifact descriptions can collapse back to the bare list ("a dependency list, the migration tasks, a rollout-and-monitoring plan, then the cleanup") — recovers ~35 words / ~15s. The clip's already ~5:20, so it's optional.
+- **Word count:** slides 315 words ≈ 2:15 (140 wpm); demo voiceover 407 words ≈ 2:48 (145 wpm). Total ≈ 5:05 — confirm against the actual recorded demo length (the video may run longer than the voiceover with on-screen AI time).
+- **Safest cut if running long:** slide 5's artifact descriptions can collapse back to the bare list ("a dependency list, the migration tasks, a rollout-and-monitoring plan, then the cleanup") — recovers ~35 words / ~15s. The clip's ~4:55, so it's optional.
 - **Thread to lean into:** "the safest migration is the one you never perform." Plant it on slide 1 ("finding the work we can avoid"), reinforce on slide 2 ("every module we retire is a migration we never have to run"), and land it in the close. The demo's "callers come down first" is the execution-side proof.
 - **Clip independence:** slide 6 says "a set of obsolete endpoints" rather than "the endpoints from the earlier clip" — keep it that way so this stands alone for anyone landing here cold. (The `[demo time]` note references `ENDPOINT_REGISTRY.md`, but that's instructor-facing, not spoken.)
-- **Demo note:** the `[demo time]` comment holds the three beats (map → decide → sequence), the Phase 0/1/2 shape, and the "callers first" voiceover thread — narrate those live; full detail is in `lesson/08-m3-c3-cross-cutting-plan.md`. The demo is plan-only — no deletions on camera.
+- **Demo note:** the demo is recorded — voiceover transcribed inline under `[demo time]` (the old beats comment was condensed to a pointer). The recorded plan came out in 5 phases (0–4); the "callers come down first" sequencing is the on-camera proof. Full brief: `lesson/08-m3-c3-cross-cutting-plan.md`.
 - **Swappable reference:** none — no names or external specifics in the spoken copy.
