@@ -79,29 +79,32 @@ Migrate one complex component carefully. Rejected: that's the *craft* lesson; th
 
 ## Suggested prompts (Option A — four beats)
 
-**Beat 1 — derive the contract:**
+**Beat 1 — derive the contract + triage by complexity:**
 > "These two components — `ActivityFeed.jsx` and `MetricsCard.jsx` — were migrated from
-> class components to functional components with hooks, and reviewed. Study both, then
-> write a `MIGRATION_CONTRACT.md` that captures the transformation precisely: the mapping
-> rules (constructor state → useState, lifecycle → effects, setState → setters), what to DO
-> (preserve behavior, preserve tests, keep render output identical), and what NOT to do
-> (don't change behavior or fix bugs, don't rename, don't extract custom hooks, don't add
-> memoization). Record one constraint up front: `UserFilters.jsx` is **out of scope** — it
-> notifies its parent during `render()`, which can't move to a functional component without
-> changing behavior, so it's handled separately. The goal is that anyone — or any agent —
-> following this contract produces the same result I'd get by hand."
+> class components to functional components with hooks, and reviewed. First, study both and
+> write a `MIGRATION_CONTRACT.md` precise enough that anyone following it lands the same
+> result — the mapping rules, and the rule to keep it a faithful 1:1 conversion that
+> preserves behavior, accessibility, and tests, like these two did. Then look at the
+> remaining class components and group them by migration complexity — simple, medium, or
+> complex — and call out any where preserving the exact behavior in a functional component
+> would be the hard part."
+
+*Instructor note (not spoken): the complexity triage should land `UserFilters.jsx` in
+"complex" — it calls `onFiltersChange` during `render()`, which can't move to a functional
+component without changing behavior. Scope the scale pass to the simple + medium set and
+leave the complex one for a separate, careful look — so you never name UserFilters on
+camera. If the AI under-rates it, you still know it's the one to hold back.*
 
 **Beat 2 — scale the fleet:**
-> "Using `MIGRATION_CONTRACT.md` and the two examples as the pattern, migrate **exactly
-> these eight files** to functional components with hooks, applying the contract
-> consistently: `MetricsSummary.jsx`, `ChurnCohortChart.jsx`, `ReportFilters.jsx`,
-> `ReportTable.jsx`, `ApiKeyManager.jsx`, `TeamSettings.jsx`, `UserExportButton.jsx`,
-> `UserTable.jsx`. Do not migrate any other file — leave `UserFilters.jsx` exactly as-is
-> (it's out of scope per the contract). Preserve each component's behavior; if you spot a
-> bug, note it but don't fix it."
+> "Now migrate the **simple and medium** ones you just categorized, applying the contract
+> consistently. Leave the complex one for a separate, careful pass. Preserve each
+> component's behavior; if you spot a bug, note it but don't fix it."
 
-The explicit allowlist is what makes the exclusion deterministic — never fall back to an
-open "migrate all class components" prompt, which would sweep `UserFilters` in.
+*Instructor note (not spoken): "simple + medium" should come out to the eight —
+`MetricsSummary`, `ChurnCohortChart`, `ReportFilters`, `ReportTable`, `ApiKeyManager`,
+`TeamSettings`, `UserExportButton`, `UserTable` — with `UserFilters` held back as the
+"complex" one. Glance at the triage on screen before scaling; if the AI grouped them
+differently, steer it back to those eight before it runs.*
 
 **Beat 3 — verify consistency:**
 > "Run the test suite. Then audit your own migrations against the contract: confirm every
@@ -157,9 +160,11 @@ comes from the slides.
   accidental deep-compare it doesn't need.
 - **Hook extraction.** The AI may still volunteer to pull fetching into `src/hooks/` out of
   habit. The contract keeps this pass 1:1 — extraction is a separate, later change.
-- **UserFilters is excluded by name** in the Beat 2 allowlist, and the contract records
-  why. The risk only reappears if you fall back to an open "migrate all class components"
-  prompt — don't. Optional 10-second beat: show the contract's out-of-scope line and explain
-  that defining what *not* to touch is part of the contract.
+- **UserFilters must stay out** — it's the one that breaks a 1:1 migration (it calls
+  `onFiltersChange` during `render()`). It's held back via the complexity triage in Beat 1
+  (it should land in "complex"), so you never name it on camera. The only risk is the AI
+  under-rating it into simple/medium — glance at the triage on screen before scaling and
+  steer it back if needed. Nice optional beat: the AI itself flags it as the hard one —
+  which is exactly the "preserving behavior is the real work" point.
 - **Time.** Eight migrations may run long for ~5 min — be ready to scale a representative
   subset (drop TeamSettings first) and say so, rather than rushing.

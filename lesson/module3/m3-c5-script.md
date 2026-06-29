@@ -29,12 +29,14 @@ So let's migrate at scale.
 <!-- Demo not scripted — narrated live over the screen recording. ~3.5 min. Outcome: MIGRATION_CONTRACT.md → scale 8 class components → verify → capture as a reusable skill. Full brief: lesson/10-m3-c5-example-driven-migration.md.
 
      Beats:
-       1. (~1.5 min) DERIVE. Point AI at the two reviewed examples — ActivityFeed (setInterval → useEffect cleanup) and
-          MetricsCard (ref-guarded effect preserving the filters refetch timing). AI writes MIGRATION_CONTRACT.md: mapping
-          rules, DO/DON'T, constraints. Record up front: UserFilters is OUT of scope (notifies its parent in render()).
-       2. (~1.5 min) SCALE. Migrate exactly these eight by name: MetricsSummary, ChurnCohortChart, ReportFilters,
-          ReportTable, ApiKeyManager, TeamSettings, UserExportButton, UserTable. The explicit allowlist keeps UserFilters
-          out — never fall back to "migrate all class components."
+       1. (~1.5 min) DERIVE + TRIAGE. Point AI at the two reviewed examples — ActivityFeed (setInterval → useEffect
+          cleanup) and MetricsCard (ref-guarded effect preserving the filters refetch timing). AI writes
+          MIGRATION_CONTRACT.md (mapping rules + the 1:1-faithful rule, derived from the examples), then groups the
+          remaining class components by complexity — simple / medium / complex. (Instructor: UserFilters should land in
+          "complex" — render-phase onFiltersChange — and stays out; never named on camera.)
+       2. (~1.5 min) SCALE. Migrate the simple + medium ones — which should be the eight: MetricsSummary, ChurnCohortChart,
+          ReportFilters, ReportTable, ApiKeyManager, TeamSettings, UserExportButton, UserTable. Leave the complex one
+          (UserFilters) for a separate pass. Glance at the triage before scaling; steer it back to those eight if needed.
        3. (~45s) VERIFY. Run the tests (UserTable.test, UserRow.test). Audit shape: no extracted hooks, nothing renamed,
           no behavior "fixed." Spot-check ChurnCohortChart keys its effect on refreshKey (scalar); ReportTable / UserTable
           came out identical.
