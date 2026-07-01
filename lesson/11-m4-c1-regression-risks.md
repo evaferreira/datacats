@@ -1,5 +1,19 @@
 # Demo Brief — Module 4, Clip 1: Why Refactors Break Production
 
+> ⚠️ **STALE — do not use as-is (flagged 2026-07-01).** This brief predates the Module 2
+> migrations. Example 1 is dead: `RevenueChart.jsx` is already a function component with a
+> `useEffect([dateRange])` — there is no `componentDidUpdate` / `>=`→`!==` to "accidentally
+> break." `REGRESSION_EXAMPLES.md` was never created and the paths are `src/...` (repo uses
+> `frontend/src/...`). **Demo decision deferred until we see the C1 slide deck.** Likely
+> replacement (robust, grounded): ask AI to "improve" the undocumented
+> `calculateRetentionScore(d, e, f)` in [metrics.js](../frontend/src/utils/metrics.js) — it
+> confidently changes behavior it can't verify, and neither can we without a baseline. That
+> makes the failure modes concrete and sets up C3's characterization test. Everything below
+> is kept for reference only.
+
+---
+
+
 ## What this demo covers
 Understanding common failure modes in refactoring: hidden dependencies, silent behavioral
 changes, load-bearing bugs, and overconfidence in AI-generated changes.
