@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [module4]
+  pull_request:
+
+jobs:
+  frontend:
+    name: Frontend checks
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - name: Test
+        run: npm test -- --watchAll=false
+      - name: Lint (design tokens)
+        run: npm run lint:tokens
+      - name: Lint (CSS)
+        run: npm run lint:css
+      - name: Build
+        run: npm run build
