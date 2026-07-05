@@ -1,4 +1,4 @@
-**Clip 2: Git Discipline for AI Changes**   (~5 minutes)
+**Clip 2: Git Discipline for AI Changes**   (~6 minutes)
 
 AI can generate changes quickly, but version control discipline keeps those changes manageable. We will cover branching strategies, focused pull requests, conventional commits, and rollback approaches while using AI to split large diffs into smaller commits, draft commit messages, summarize pull requests, and identify appropriate reviewers.
 
@@ -32,12 +32,18 @@ Script note: *Makes changes reviewable… Overall, it helps us reduce risks.*
 **Git principles**
 
 - Small, isolated changes
-- Focused, conventional commits
+- Focused commits
 - Peer reviews
 
-Script note: *Conventional commits, peer review chosen based on who is the Subject matter expert on the feature we are working on.*
+Script note: *Peer review chosen based on who is the Subject matter expert on the feature we are working on.*
 
 ### Slide 5
+
+**Conventional commits**
+
+Lightweight convention on top of commit message
+
+### Slide 6
 
 demo introduction
 
@@ -45,20 +51,20 @@ demo introduction
 
 Script note: *Summarize pull requests, suggest reviewers, split large diffs into logical commits…*
 
-### Slide 6
+### Slide 7
 
 **Worktrees**
 
 - Parallel experiments
 - Avoid constant branch switching
 
-### Slide 7
+### Slide 8
 
 demo introduction
 
 **Worktrees for parallelization**
 
-### Slide 8
+### Slide 9
 
 **"Git isn't just version control; it's our safety net."**
 

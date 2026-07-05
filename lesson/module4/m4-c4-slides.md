@@ -1,4 +1,4 @@
-**Clip 4: Detecting Side Effects Early**   (~5 minutes)
+**Clip 4: Detecting Side Effects Early**   (~4 minutes)
 
 Some regressions appear only after deployment. We will discuss staged rollouts, canary releases, logs, monitoring, error rates, performance baselines, and user feedback loops, using AI to analyze logs, group errors, compare release metrics, and highlight suspicious changes quickly.
 

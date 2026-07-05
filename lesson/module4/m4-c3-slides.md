@@ -1,4 +1,4 @@
-**Clip 3: CI/CD Quality Gates**   (~7 minutes)
+**Clip 3: CI/CD Quality Gates**   (~6 minutes)
 
 Automated pipelines are essential for safe refactoring at scale. We will use characterization tests, regression tests, linting, type checking, build validation, and visual or end-to-end checks to catch issues before production, while AI helps generate missing tests, stabilize flaky suites, and explain pipeline failures.
 

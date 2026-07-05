@@ -84,11 +84,11 @@ Describe how to integrate AI-assisted refactoring into CI/CD pipelines to automa
 Module 4 – Safe and Controlled AI-Assisted Refactoring
 Clip 1: Why Refactors Break Production (~3 minutes)
 Even well-intentioned refactors can introduce regressions when behavior changes unintentionally. We will explore common failure modes such as hidden dependencies, large rewrite scope, insufficient testing, and overconfidence in AI-generated changes. We will also discuss why small, controlled iterations are safer than big-bang rewrites.
-Clip 2: Git Discipline for AI Changes  (~5 minutes)
+Clip 2: Git Discipline for AI Changes  (~6 minutes)
 AI can generate changes quickly, but version control discipline keeps those changes manageable. We will cover branching strategies, focused pull requests, conventional commits, and rollback approaches while using AI to split large diffs into smaller commits, draft commit messages, summarize pull requests, and identify appropriate reviewers.
-Clip 3: CI/CD Quality Gates  (~7 minutes)
+Clip 3: CI/CD Quality Gates  (~6 minutes)
 Automated pipelines are essential for safe refactoring at scale. We will use characterization tests, regression tests, linting, type checking, build validation, and visual or end-to-end checks to catch issues before production, while AI helps generate missing tests, stabilize flaky suites, and explain pipeline failures.  
-Clip 4: Detecting Side Effects Early  (~5 minutes)
+Clip 4: Detecting Side Effects Early  (~4 minutes)
 Some regressions appear only after deployment. We will discuss staged rollouts, canary releases, logs, monitoring, error rates, performance baselines, and user feedback loops, using AI to analyze logs, group errors, compare release metrics, and highlight suspicious changes quickly.    
 
 
