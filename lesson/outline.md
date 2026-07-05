@@ -82,7 +82,7 @@ Demonstrate how to apply version control practices that support safe AI-assisted
 Describe how to integrate AI-assisted refactoring into CI/CD pipelines to automatically detect regressions and enforce quality gates
 
 Module 4 – Safe and Controlled AI-Assisted Refactoring
-Clip 1: Why Refactors Break Production (~4 minutes)
+Clip 1: Why Refactors Break Production (~3 minutes)
 Even well-intentioned refactors can introduce regressions when behavior changes unintentionally. We will explore common failure modes such as hidden dependencies, large rewrite scope, insufficient testing, and overconfidence in AI-generated changes. We will also discuss why small, controlled iterations are safer than big-bang rewrites.
 Clip 2: Git Discipline for AI Changes  (~5 minutes)
 AI can generate changes quickly, but version control discipline keeps those changes manageable. We will cover branching strategies, focused pull requests, conventional commits, and rollback approaches while using AI to split large diffs into smaller commits, draft commit messages, summarize pull requests, and identify appropriate reviewers.
