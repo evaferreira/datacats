@@ -21,7 +21,9 @@ export function timeAgo(date) {
   const hours = Math.floor(minutes / 60)
   if (hours < 24) return hours + 'h ago'
   const days = Math.floor(hours / 24)
-  return days + 'd ago'
+  if (days < 30) return days + 'd ago'
+  const months = Math.floor(days / 30)
+  return months + 'mo ago'
 }
 
 export function isoDate(date) {
