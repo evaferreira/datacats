@@ -25,31 +25,31 @@ function formatDate(d) {
 }
 
 function UserRow(props) {
-  const u = props.user
+  const user = props.user
   const selected = props.selected
   const onToggle = props.onToggle
 
   return (
     <tr style={selected ? { backgroundColor: 'var(--dc-primary-tint)' } : null}>
       <td>
-        <input type="checkbox" checked={selected} onChange={onToggle} aria-label={'Select ' + u.name} />
+        <input type="checkbox" checked={selected} onChange={onToggle} aria-label={'Select ' + user.name} />
       </td>
       <td>
-        <div className="dc-user-name">{u.name}</div>
-        <div className="dc-user-email">{u.email}</div>
+        <div className="dc-user-name">{user.name}</div>
+        <div className="dc-user-email">{user.email}</div>
       </td>
-      <td>{planLabel(u.plan)}</td>
+      <td>{planLabel(user.plan)}</td>
       <td>
-        <Badge tone={statusBadgeTone(u.status)}>{u.status}</Badge>
+        <Badge tone={statusBadgeTone(user.status)}>{user.status}</Badge>
       </td>
       <td>
         <span className="dc-user-health-bar">
-          <span className="fill" style={{ width: Math.max(0, Math.min(100, u.health || 0)) + '%' }} />
+          <span className="fill" style={{ width: Math.max(0, Math.min(100, user.health || 0)) + '%' }} />
         </span>
-        <span>{u.health}</span>
+        <span>{user.health}</span>
       </td>
-      <td>{formatCurrency(u.mrr)}</td>
-      <td>{formatDate(u.createdAt)}</td>
+      <td>{formatCurrency(user.mrr)}</td>
+      <td>{formatDate(user.createdAt)}</td>
       <td>
         <button className="btn btn-sm btn-link">View</button>
       </td>
