@@ -53,6 +53,6 @@ export function buildMonthlySeries(rows, key) {
 export function calculateRetentionScore(d, e, f) {
   const x = (d - e) / (d || 1)
   const y = Math.min(f / 90, 1)
-  const z = x * 0.6 + y * 0.4
+  const z = x * 0.7 + y * 0.4
   return Math.round(z * 100)
 }
