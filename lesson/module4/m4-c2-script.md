@@ -1,6 +1,6 @@
 # Clip 2: Git Discipline for AI Changes — Script Draft
 
-**Total clip duration:** ~6 min (recorded) — **Demo portion:** two demos, not scripted — git-discipline commit split + worktrees parallelization; narrated live over the recording, instructor briefs in HTML comments under slides 6 and 8 — **Spoken slide budget:** ~3:00 min (419 words at Eva's 140 wpm pace) — **Voice:** Eva — collaborative, warm, direct, conversational — **Threaded thesis:** *Git isn't just version control — it's the safety net that keeps fast, AI-driven change reviewable, reversible, and recoverable; and AI assists in the workflow, not just the code* — **Outline coverage status:** all slide bullets covered; outline bullets (branching, focused PRs, conventional commits, rollback; AI splits diffs / drafts messages / summarizes PRs / suggests reviewers) land across slides 2 & 4 + demo 1; worktrees demo (slide 8) = two unrelated tasks in parallel.
+**Total clip duration:** ~5:40 speaking time (recorded; voiceover transcribed below) — **Demo portion:** two demos (git-discipline commit split + worktrees parallelization), transcribed below — 387 words ≈ 2:40 at Eva's 145 wpm demo pace; instructor briefs in HTML comments under slides 6 and 8 — **Spoken slide budget:** ~3:00 min (419 words at Eva's 140 wpm pace) — **Voice:** Eva — collaborative, warm, direct, conversational — **Threaded thesis:** *Git isn't just version control — it's the safety net that keeps fast, AI-driven change reviewable, reversible, and recoverable; and AI assists in the workflow, not just the code* — **Outline coverage status:** all slide bullets covered; outline bullets (branching, focused PRs, conventional commits, rollback; AI splits diffs / drafts messages / summarizes PRs / suggests reviewers) land across slides 2 & 4 + demo 1; worktrees demo (slide 8) = two unrelated tasks in parallel.
 
 ---
 
@@ -36,15 +36,24 @@ Here's where AI helps with the workflow itself, not just the code. After a long 
 
 [demo time]
 
-<!-- Demo 1 — NOT scripted; narrate live over the recording. Full brief: lesson/12-m4-c2-git-discipline.md.
- Setup (off-camera): stage a realistic mixed working tree — ~3 unrelated edits so `git diff` spans multiple logical
- changes (e.g. fix: add the months branch to timeAgo in frontend/src/utils/dateUtils.js; refactor: a readability-only
- rename in a component — keep OFF metrics.js, that's C3's file; chore/docs: bump a dep in frontend/package.json or edit
- README). Leave all three uncommitted so `git status` shows a jumble.
- Beats: (1) show `git status` / `git diff` — one messy tree. (2) Ask AI to read the diff and group it into focused
- commits. (3) A conventional message per group (feat/fix/refactor/chore/docs). (4) Stage + commit the groups → clean,
- readable history. (5) Draft a PR description that explains the WHY, not just the what. (6) Suggest reviewers (narrated
- straight, no caveat). Opening prompt is in the brief. Watch-for: keep commits atomic — each should pass CI on its own. -->
+
+In my repository, I have three unrelated changes in a new branch. A change to a README, a clearer naming convention on the UserRow file and a new feature on our date utils file.
+
+
+Let’s ask our AI agent for help creating meaningful commits for each one of these. I will mention that we want standard conventional commits and that it should carefully read the git diff to understand the changes.
+
+
+It proposes 3 different commits: a feat for the date-utils feature, a refactor for the rename and a docs for the README improvements.
+
+
+Let’s go ahead and ask it to create those three commits.
+
+
+Once done, we can create a new pull request with those 3 commits, and… why not? Ask our agent to help us write a description for it. Whenever I do this, I make sure the description is written for human readers. Otherwise it drowns in details my coworkers don’t need — things they’d get just by reading the diff.
+
+
+Now that the PR is ready, it’s time to ask for reviews! If you have a repository with many committers and a good history, GitHub will automatically suggest reviewers for you. This is great data because it will pick the users according to who has recently edited those files, so you will be able to quickly find your subject matter experts, in case you weren’t familiar with that piece of the code.
+
 
 [slideshow]
 
@@ -56,14 +65,16 @@ So let's put worktrees to work, running two unrelated tasks at the same time.
 
 [demo time]
 
-<!-- Demo 2 — NOT scripted; narrate live. Full brief: lesson/12-m4-c2-git-discipline.md → "Demo 2 — Worktrees for parallelization".
- Concept: two UNRELATED tasks in parallel, each in its own git worktree, no branch-switching.
- Beats: (1) from module4, add two worktrees on two branches, e.g. `git worktree add ../datacats-feat feat/xyz` and
- `git worktree add ../datacats-fix fix/abc`. (2) Open an agent session in each folder — one works a small feature, the
- other a bug fix — at the same time. (3) Show the main checkout is never disturbed: no stash, no thrash. (4) Commit each
- in its own worktree; clean up with `git worktree remove`.
- Watch-for: pick two genuinely independent tasks so they don't touch the same files. Keep it short — the point is the
- parallel workflow, not the code itself. -->
+Here, I’m working on extending the Badge component to handle different sizes, and imagine that while I do this, I get a request to update the way we handle numbers so we can render Billions better.
+
+
+Since I don’t want to stash my changes and interrupt my workflow, I will ask my AI agent to do this for me. I will ask it to work on this feature, but I will clearly state that I want it to do so in a worktree, and that we will name it the-billions-fix.
+
+
+So, Claude makes the changes in a new worktree, and then I can ask it to commit and push the changes, so I can review them in the PR while I keep on working on my other updates.
+
+
+Once you are done, don’t forget to clean your worktree with git worktree remove or… simply ask Claude to do so for you!
 
 [slideshow]
 
@@ -73,9 +84,9 @@ So Git isn't just version control — it's our safety net. It's what makes fast,
 
 ## Notes for Eva
 
-- **Word count (spoken slide narration only):** 419 words ≈ 3:00 at your 140 wpm pace. Excludes both demos (narrated live) and the HTML-comment briefs. Total clip lands ~6 min depending on demo length — ~3:00 of slides leaves ~3:00 for the two demos (~1–1.5 min each). Slide 5 (Conventional commits) includes a brief screen-share of conventionalcommits.org.
+- **Word count:** slides 419 words ≈ 3:00 @140 + demo voiceover 387 words ≈ 2:40 @145 = **~5:40 speaking time** (recorded; voiceover transcribed below). Excludes the HTML-comment briefs. Slide 5 (Conventional commits) includes a brief screen-share of conventionalcommits.org.
 - **Safest cut if running long:** slide 2's four reasons can compress to a bare list ("safe experimentation, reviewable, reversible, recoverable — that's how we reduce risk"), recovering ~35 words / ~15s. Slide 1's open is the next most trimmable.
 - **Thread to lean into:** "safety net" — plant it on slide 1, echo "reviewable / reversible / recoverable" on slide 2, land it on slide 9. Second thread: "AI assists in the workflow, not just the code" (slide 6 → close).
 - **Clip independence:** no references to other clips; "as we saw" in the close (slide 9) points back to this clip's own demos, and the close stays thematic. Stands alone for anyone landing here cold.
-- **Demo note:** BOTH demos are unscripted — live narration over the recording. Demo 1 brief = `lesson/12-m4-c2-git-discipline.md` (messy working tree → atomic commits → PR summary → reviewers). Demo 2 (worktrees) — beats are in the HTML comment under slide 8, and a full "Demo 2 — Worktrees for parallelization" section now exists in the C2 brief. Reviewer-suggestion is narrated straight (no caveat), per your call.
+- **Demo note:** BOTH demos are recorded; voiceover transcribed above (was narrated live). Demo 1 brief = `lesson/12-m4-c2-git-discipline.md` (messy working tree → atomic commits → PR summary → reviewers). Demo 2 (worktrees) — beats are in the HTML comment under slide 8, and a full "Demo 2 — Worktrees for parallelization" section now exists in the C2 brief. Reviewer-suggestion is narrated straight (no caveat), per your call.
 - **Swappable reference:** demo-1 mixed-tree edits are swappable (see brief); the worktrees demo needs two genuinely independent tasks so they don't collide on the same files.
