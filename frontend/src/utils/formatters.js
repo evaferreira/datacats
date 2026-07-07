@@ -24,6 +24,7 @@ export function formatNumber(value) {
 export function formatCompactNumber(value) {
   if (value == null || isNaN(value)) return '0'
   const n = Number(value)
+  if (Math.abs(n) >= 1_000_000_000) return (n / 1_000_000_000).toFixed(1) + 'B'
   if (Math.abs(n) >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M'
   if (Math.abs(n) >= 1_000) return (n / 1_000).toFixed(1) + 'K'
   return String(n)
